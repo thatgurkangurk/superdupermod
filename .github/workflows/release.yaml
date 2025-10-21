@@ -58,6 +58,9 @@ jobs:
         with:
           name: changelog
 
+      - name: Build with Gradle
+        run: ./gradlew build
+
       - name: Upload build output (libs)
         uses: actions/upload-artifact@v4
         with:
@@ -76,6 +79,11 @@ jobs:
     needs: [ changelog, build ]
 
     steps:
+      - name: Download changelog
+        uses: actions/download-artifact@v4
+        with:
+          name: changelog
+
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
           # Only include this section if you wish to publish
