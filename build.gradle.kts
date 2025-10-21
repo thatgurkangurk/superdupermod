@@ -1,11 +1,15 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.changelog.ChangelogSectionUrlBuilder
+import org.jetbrains.changelog.date
 
 plugins {
     id("fabric-loom") version "1.11-SNAPSHOT"
     id("maven-publish")
     id("org.jetbrains.kotlin.jvm") version "2.2.0"
     id("dev.yumi.gradle.licenser") version "2.1.1"
+    id("com.modrinth.minotaur") version "2.+"
+    id("org.jetbrains.changelog") version "2.4.+"
     java
 }
 
@@ -33,6 +37,21 @@ license {
     include("**/*.java") // Include Java files into the file resolution.
     include("**/*.kt") // Include Java files into the file resolution.
     exclude("**/*.properties") // Exclude properties files from the file resolution.
+}
+
+changelog {
+    version = property("mod_version")!! as String
+    path = file("CHANGELOG.md").canonicalPath
+    header = provider { "[${version.get()}] - ${date()}" }
+    headerParserRegex = """(\d+\.\d+)""".toRegex()
+    itemPrefix = "-"
+    keepUnreleasedSection = true
+    unreleasedTerm = "[Unreleased]"
+    groups = listOf("Added", "Changed", "Removed", "Fixed")
+    lineSeparator = "\n"
+    combinePreReleases = true
+    sectionUrlBuilder = ChangelogSectionUrlBuilder { repositoryUrl, currentVersion, previousVersion, isUnreleased -> "foo" }
+    outputFile = file("release-note.txt")
 }
 
 dependencies {
