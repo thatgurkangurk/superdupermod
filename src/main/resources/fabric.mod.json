@@ -32,5 +32,10 @@
       "@supported_versions@"
     ],
     "fabric-language-kotlin": ">=@fabric_kotlin_version@"
+  },
+  "custom": {
+    "mc-publish": {
+      "modrinth": "super-duper-mod"
+    }
   }
 }

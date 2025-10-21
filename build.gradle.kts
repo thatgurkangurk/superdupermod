@@ -43,7 +43,7 @@ changelog {
     version = property("mod_version")!! as String
     path = file("CHANGELOG.md").canonicalPath
     header = provider { "[${version.get()}] - ${date()}" }
-    headerParserRegex = """(\d+\.\d+)""".toRegex()
+    headerParserRegex = """(\d+\.\d+\.\d+(?:-[\w\d]+)?)""".toRegex()
     itemPrefix = "-"
     keepUnreleasedSection = true
     unreleasedTerm = "[Unreleased]"
