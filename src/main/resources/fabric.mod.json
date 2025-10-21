@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "superdupermod",
+  "version": "@version@",
+
+  "name": "Super Duper Mod",
+  "description": "a super duper amazing mod made by gurkan",
+  "authors": ["Gurkan"],
+  "contact": {},
+  "icon": "./assets/icon.png",
+
+  "license": "MPL-2.0",
+
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "me.gurkz.superdupermod.SuperDuperMod"
+      }
+    ]
+  },
+
+  "mixins": [
+    "superdupermod.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": [
+      "@supported_versions@"
+    ],
+    "fabric-language-kotlin": ">=@fabric_kotlin_version@"
+  }
+}
