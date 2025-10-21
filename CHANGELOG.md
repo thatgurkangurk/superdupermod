@@ -10,7 +10,13 @@
 
 ### Fixed
 
-## [0.0.3] - 2025-10-21
+## [0.0.4] - 2025-10-21
+
+### Changed
+
+- final (hopefully) internal build fixes update
+
+## 0.0.3 - 2025-10-21
 
 ### Changed
 
