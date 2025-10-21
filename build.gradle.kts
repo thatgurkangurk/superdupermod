@@ -54,6 +54,8 @@ changelog {
     outputFile = file("release-note.txt")
 }
 
+val lampVersion = property("lamp_version")
+
 dependencies {
     minecraft("com.mojang:minecraft:$targetVersion")
     mappings("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
@@ -61,6 +63,11 @@ dependencies {
 
     modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
+
+    // lamp
+    modImplementation("io.github.revxrsal:lamp.common:$lampVersion")?.let { include(it) }
+    modImplementation("io.github.revxrsal:lamp.fabric:$lampVersion")?.let { include(it) }
+    modImplementation("io.github.revxrsal:lamp.brigadier:$lampVersion")?.let { include(it) }
 }
 
 tasks {

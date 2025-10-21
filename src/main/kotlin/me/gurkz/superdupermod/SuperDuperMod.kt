@@ -8,10 +8,24 @@
 
 package me.gurkz.superdupermod
 
+import me.gurkz.superdupermod.SuperDuperMod.VERSION
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.FabricLoader
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import revxrsal.commands.annotation.Command
+import revxrsal.commands.annotation.Description
+import revxrsal.commands.fabric.FabricLamp
+import revxrsal.commands.fabric.actor.FabricCommandActor
+
+// i expect this to be in its own file later
+class SuperDuperModCommand {
+    @Command("superdupermod")
+    @Description("shows info about super duper mod")
+    fun superDuperMod(actor: FabricCommandActor) {
+        actor.reply("hello from super duper mod version ${VERSION}!")
+    }
+}
 
 object SuperDuperMod : ModInitializer {
     private const val MOD_ID: String = "superdupermod"
@@ -20,5 +34,7 @@ object SuperDuperMod : ModInitializer {
 
     override fun onInitialize() {
         LOGGER.info("hi from super duper mod version $VERSION")
+        val lamp = FabricLamp.builder().build()
+        lamp.register(SuperDuperModCommand())
     }
 }
