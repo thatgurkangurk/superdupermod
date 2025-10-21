@@ -10,7 +10,13 @@
 
 ### Fixed
 
-## [0.0.5] - 2025-10-21
+## [0.0.6] - 2025-10-21
+
+### Changed
+
+- the "hello from super duper mod" log now shows the version
+
+## 0.0.5 - 2025-10-21
 
 ### Changed
 
