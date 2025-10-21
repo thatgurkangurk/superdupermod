@@ -84,10 +84,11 @@ jobs:
         with:
           name: changelog
 
-      - name: Download build artifacts
+      - name: Download libs
         uses: actions/download-artifact@v4
         with:
           name: libs
+          path: build/libs/
 
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
