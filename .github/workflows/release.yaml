@@ -21,6 +21,9 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
       - name: Generate changelog
         run: ./gradlew getChangelog --project-version ${{ github.ref_name }} --output-file ./changelog.out.md
 
@@ -47,21 +50,13 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
       - name: Download changelog
         uses: actions/download-artifact@v4
         with:
           name: changelog
-
-      - name: Publish to GitHub Packages
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: publish
-          cache-read-only: false
-        env:
-          USERNAME: ${{ github.actor }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-          CHANGELOG_PATH: "./changelog.out.md"
 
       - name: Upload build output (libs)
         uses: actions/upload-artifact@v4
