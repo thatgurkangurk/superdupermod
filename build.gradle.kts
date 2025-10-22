@@ -16,6 +16,7 @@ plugins {
 val mcVersions = property("supported_versions")!!
 val targetVersion = mcVersions.toString().split(";")[0]
 val fabricKotlinVersion = property("fabric_kotlin_version")!!
+val nightConfigVersion = property("night_config_version")!!
 
 group = property("maven_group")!!
 version = property("mod_version")!!
@@ -54,6 +55,7 @@ changelog {
 }
 
 val lampVersion = property("lamp_version")
+val fabricPermissionsApiVersion = property("fabric_permissions_api_version")
 
 dependencies {
     minecraft("com.mojang:minecraft:$targetVersion")
@@ -67,6 +69,14 @@ dependencies {
     modImplementation("io.github.revxrsal:lamp.common:$lampVersion")?.let { include(it) }
     modImplementation("io.github.revxrsal:lamp.fabric:$lampVersion")?.let { include(it) }
     modImplementation("io.github.revxrsal:lamp.brigadier:$lampVersion")?.let { include(it) }
+
+    // night config
+    modImplementation("com.electronwill.night-config:core:$nightConfigVersion")?.let { include(it) }
+    modImplementation("com.electronwill.night-config:toml:$nightConfigVersion")?.let { include(it) }
+    modImplementation(kotlin("reflect"))
+
+    // fabric permissions api
+    modImplementation("me.lucko:fabric-permissions-api:$fabricPermissionsApiVersion")
 }
 
 tasks {
