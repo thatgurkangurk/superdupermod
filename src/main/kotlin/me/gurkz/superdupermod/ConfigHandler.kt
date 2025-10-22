@@ -75,7 +75,16 @@ class ConfigHandler<T : Any>(
         val validKeys = kClass.memberProperties.map { if (path.isEmpty()) it.name else "$path.${it.name}" }.toSet()
 
         // Remove keys that exist in the config but are no longer in the class
-        val keysToRemove = config.valueMap().keys.filter { it.startsWith(path) && it !in validKeys }
+        val keysToRemove = config.valueMap().keys.filter { key ->
+            val matchesPath = if (path.isEmpty()) {
+                // At root level, match keys that don't have a parent or match our valid keys
+                !key.contains(".") || validKeys.any { key.startsWith("$it.") }
+            } else {
+                // At nested level, match only keys under this path
+                key == path || key.startsWith("$path.")
+            }
+            matchesPath && key !in validKeys
+        }
         keysToRemove.forEach { config.remove(it) }
 
         // Recursively clean nested data classes
