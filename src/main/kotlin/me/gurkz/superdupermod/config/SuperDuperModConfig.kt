@@ -11,7 +11,7 @@ package me.gurkz.superdupermod.config
 import me.gurkz.superdupermod.annotation.Comment
 
 data class SilenceMobsConfig (
-    @Comment("names to trigger silencing uwu")
+    @Comment("names to trigger silencing an entity. this is case-insensitive.")
     var validNames: List<String> = listOf("silence me"),
 )
 
