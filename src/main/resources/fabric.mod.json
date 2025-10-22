@@ -31,7 +31,8 @@
     "minecraft": [
       "@supported_versions@"
     ],
-    "fabric-language-kotlin": ">=@fabric_kotlin_version@"
+    "fabric-language-kotlin": ">=@fabric_kotlin_version@",
+    "fabric-permissions-api-v0": "*"
   },
   "custom": {
     "mc-publish": {

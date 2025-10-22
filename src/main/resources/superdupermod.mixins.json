@@ -4,6 +4,7 @@
   "package": "me.gurkz.superdupermod.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "SilenceMobsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
