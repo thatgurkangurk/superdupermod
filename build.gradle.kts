@@ -2,6 +2,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.changelog.ChangelogSectionUrlBuilder
 import org.jetbrains.changelog.date
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     id("fabric-loom") version "1.11-SNAPSHOT"
@@ -113,6 +114,18 @@ tasks {
             // uncomment to publish to the local maven
             // mavenLocal()
         }
+    }
+}
+
+tasks.withType<JavaCompile> {
+    // Preserve parameter names in the bytecode
+    options.compilerArgs.add("-parameters")
+}
+
+// optional: if you're using Kotlin
+tasks.withType<KotlinJvmCompile> {
+    compilerOptions {
+        javaParameters = true
     }
 }
 

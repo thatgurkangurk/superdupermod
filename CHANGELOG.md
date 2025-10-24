@@ -10,7 +10,13 @@
 
 ### Fixed
 
-## [0.2.0] - 2025-10-22
+## [0.2.1] - 2025-10-24
+
+### Added
+
+- make the silence mob names configurable in game `/superdupermod silencemobs names [list/add/remove]` (permission: `superdupermod.command.silencemobs.names.[add/remove]`)
+
+## 0.2.0 - 2025-10-22
 
 ### Added
 

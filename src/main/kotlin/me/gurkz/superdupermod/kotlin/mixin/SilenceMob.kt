@@ -23,6 +23,8 @@ import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
+
+
 object SilenceMob {
     @JvmStatic
     fun silenceEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, cir: CallbackInfoReturnable<ActionResult>) {
