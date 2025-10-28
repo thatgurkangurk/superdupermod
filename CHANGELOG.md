@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- disable farmland trampling when you have feather falling
 
 ### Changed
 
