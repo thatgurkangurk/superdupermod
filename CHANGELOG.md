@@ -4,6 +4,7 @@
 
 ### Added
 - disable farmland trampling when you have feather falling
+- make villagers leashable
 
 ### Changed
 
