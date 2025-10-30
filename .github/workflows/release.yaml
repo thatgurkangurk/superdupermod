@@ -19,10 +19,9 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: 'gradle'
 
-      - name: Make Gradle wrapper executable
-        run: chmod +x ./gradlew
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
 
       - name: Generate changelog
         run: ./gradlew getChangelog --project-version ${{ github.ref_name }} --output-file ./changelog.out.md
@@ -48,10 +47,11 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: 'gradle'
 
-      - name: Make Gradle wrapper executable
-        run: chmod +x ./gradlew
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+      - name: Build with Gradle
+        run: ./gradlew build
 
       - name: Download changelog
         uses: actions/download-artifact@v4
@@ -59,7 +59,9 @@ jobs:
           name: changelog
 
       - name: Build with Gradle
-        run: ./gradlew build
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
 
       - name: Upload build output (libs)
         uses: actions/upload-artifact@v4
