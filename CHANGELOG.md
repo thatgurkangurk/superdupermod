@@ -10,7 +10,13 @@
 
 ### Fixed
 
-## [0.3.0] - 2025-10-28
+## [0.3.1] - 2025-10-30
+
+### Changed
+
+- use fzzy config lib instead of a custom config library
+
+## 0.3.0 - 2025-10-28
 
 ### Added
 

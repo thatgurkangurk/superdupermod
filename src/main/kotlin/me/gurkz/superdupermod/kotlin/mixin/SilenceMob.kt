@@ -8,7 +8,7 @@
 
 package me.gurkz.superdupermod.kotlin.mixin
 
-import me.gurkz.superdupermod.SuperDuperMod.CONFIG_HANDLER
+import me.gurkz.superdupermod.config.Configs
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -33,9 +33,9 @@ object SilenceMob {
             return
         }
 
-        val config = CONFIG_HANDLER.get()
+        val config = Configs.superDuperConfig.silenceMobs
 
-        if (!config.silenceMobs.validNames.contains(text.string.lowercase())) {
+        if (!config.validNames.contains(text.string.lowercase())) {
             return
         }
 

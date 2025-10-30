@@ -5,7 +5,7 @@ import org.jetbrains.changelog.date
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
-    id("fabric-loom") version "1.11-SNAPSHOT"
+    id("fabric-loom") version "1.12-SNAPSHOT"
     id("maven-publish")
     id("org.jetbrains.kotlin.jvm") version "2.2.0"
     id("dev.yumi.gradle.licenser") version "2.1.1"
@@ -17,7 +17,6 @@ plugins {
 val mcVersions = property("supported_versions")!!
 val targetVersion = mcVersions.toString().split(";")[0]
 val fabricKotlinVersion = property("fabric_kotlin_version")!!
-val nightConfigVersion = property("night_config_version")!!
 
 group = property("maven_group")!!
 version = property("mod_version")!!
@@ -28,6 +27,7 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
+    maven("https://maven.fzzyhmstrs.me/") { name = "FzzyMaven" } // fzzy config (https://github.com/fzzyhmstrs/fconfig)
 }
 
 license {
@@ -57,6 +57,7 @@ changelog {
 
 val lampVersion = property("lamp_version")
 val fabricPermissionsApiVersion = property("fabric_permissions_api_version")
+val fzzyConfigVersion = property("fzzy_config_version")
 
 dependencies {
     minecraft("com.mojang:minecraft:$targetVersion")
@@ -71,10 +72,8 @@ dependencies {
     modImplementation("io.github.revxrsal:lamp.fabric:$lampVersion")?.let { include(it) }
     modImplementation("io.github.revxrsal:lamp.brigadier:$lampVersion")?.let { include(it) }
 
-    // night config
-    modImplementation("com.electronwill.night-config:core:$nightConfigVersion")?.let { include(it) }
-    modImplementation("com.electronwill.night-config:toml:$nightConfigVersion")?.let { include(it) }
-    modImplementation(kotlin("reflect"))
+    // fzzy config
+    modImplementation("me.fzzyhmstrs:fzzy_config:$fzzyConfigVersion")
 
     // fabric permissions api
     modImplementation("me.lucko:fabric-permissions-api:$fabricPermissionsApiVersion")
@@ -88,7 +87,8 @@ tasks {
             filter<ReplaceTokens>("tokens" to mapOf(
                 "supported_versions" to mcVersions.toString().split(";").joinToString("\",\""),
                 "version" to project.version,
-                "fabric_kotlin_version" to fabricKotlinVersion
+                "fabric_kotlin_version" to fabricKotlinVersion,
+                "fzzy_config_version" to fzzyConfigVersion
             ))
         }
     }

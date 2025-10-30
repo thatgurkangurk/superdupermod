@@ -8,11 +8,12 @@
 
 package me.gurkz.superdupermod
 
-import me.gurkz.superdupermod.SuperDuperMod.CONFIG_HANDLER
+import me.fzzyhmstrs.fzzy_config.api.ConfigApi
 import me.gurkz.superdupermod.SuperDuperMod.VERSION
 import me.gurkz.superdupermod.command.SilenceMobName
 import me.gurkz.superdupermod.command.SilenceMobsCommands
-import me.gurkz.superdupermod.config.SuperDuperModConfig
+import me.gurkz.superdupermod.config.Configs
+import me.gurkz.superdupermod.config.SuperDuperConfig
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.FabricLoader
 import org.slf4j.Logger
@@ -23,7 +24,6 @@ import revxrsal.commands.autocomplete.SuggestionProvider
 import revxrsal.commands.fabric.FabricLamp
 import revxrsal.commands.fabric.actor.FabricCommandActor
 import revxrsal.commands.fabric.annotation.CommandPermission
-import java.io.File
 
 // i expect this to be in its own file later
 class SuperDuperModCommand {
@@ -37,7 +37,7 @@ class SuperDuperModCommand {
     @Description("reload superdupermod config")
     @CommandPermission("superdupermod.command.reload", vanilla = 4)
     fun reloadCommand(actor: FabricCommandActor) {
-        CONFIG_HANDLER.reload()
+        Configs.superDuperConfig = ConfigApi.readOrCreateAndValidate(::SuperDuperConfig)
         actor.reply("reloaded config")
     }
 }
@@ -46,20 +46,19 @@ object SuperDuperMod : ModInitializer {
     const val MOD_ID: String = "superdupermod"
     private val loader: FabricLoader = FabricLoader.getInstance()
     private val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
-    val VERSION: String = FabricLoader.getInstance().getModContainer(MOD_ID).map { container -> container.metadata.version.friendlyString }.orElse("unknown version")
-    val CONFIG_HANDLER = ConfigHandler(
-        File(
-            loader.configDir.toFile(),
-            "superdupermod.toml"
-        ), SuperDuperModConfig::class)
+    val VERSION: String = loader.getModContainer(MOD_ID).map {
+        container ->
+            container.metadata.version.friendlyString
+    }.orElse("unknown version")
 
     override fun onInitialize() {
         LOGGER.info("hi from super duper mod version $VERSION")
+        Configs.superDuperConfig // reference it so it loads
         val lamp = FabricLamp.builder()
             .suggestionProviders { providers ->
                 providers.addProviderForAnnotation(SilenceMobName::class.java) { _ ->
                     SuggestionProvider { _ ->
-                        CONFIG_HANDLER.get().silenceMobs.validNames.toList()
+                        Configs.superDuperConfig.silenceMobs.validNames.toList()
                     }
                 }
             }

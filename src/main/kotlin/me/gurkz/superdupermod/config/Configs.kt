@@ -6,7 +6,10 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-package me.gurkz.superdupermod.annotation
+package me.gurkz.superdupermod.config
 
-@Target(AnnotationTarget.PROPERTY)
-annotation class Comment(val comment: String)
+import me.fzzyhmstrs.fzzy_config.api.ConfigApi
+
+internal object Configs {
+    var superDuperConfig = ConfigApi.registerAndLoadConfig(::SuperDuperConfig)
+}

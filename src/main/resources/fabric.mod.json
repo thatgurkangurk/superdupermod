@@ -38,7 +38,8 @@
     "mc-publish": {
       "modrinth": "super-duper-mod",
       "dependencies": [
-        "fabric-permissions-api@>0.5.0(required)#(ignore:curseforge)"
+        "fabric-permissions-api@>0.5.0(required)#(ignore:curseforge)",
+        "fzzy_config@>@fzzy_config_version@(required)#(ignore:curseforge)"
       ]
     }
   }

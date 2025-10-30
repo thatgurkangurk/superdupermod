@@ -8,7 +8,7 @@
 
 package me.gurkz.superdupermod.command
 
-import me.gurkz.superdupermod.SuperDuperMod.CONFIG_HANDLER
+import me.gurkz.superdupermod.config.Configs
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Description
 import revxrsal.commands.fabric.actor.FabricCommandActor
@@ -21,9 +21,9 @@ object SilenceMobsCommands {
     @Command("superdupermod silencemobs names list")
     @Description("lists names that trigger mob silencing")
     fun listNames(actor: FabricCommandActor) {
-        val config = CONFIG_HANDLER.get()
+        val config = Configs.superDuperConfig.silenceMobs
 
-        val names = config.silenceMobs.validNames.joinToString(", ")
+        val names = config.validNames.joinToString(", ")
 
         actor.reply("current names are: $names")
     }
@@ -32,11 +32,11 @@ object SilenceMobsCommands {
     @Description("adds a name that triggers mob silencing")
     @CommandPermission("superdupermod.command.silencemobs.names.add", vanilla = 4)
     fun addName(actor: FabricCommandActor, nameToAdd: String) {
-        val config = CONFIG_HANDLER.get()
+        val config = Configs.superDuperConfig.silenceMobs
 
-        config.silenceMobs.validNames += nameToAdd
+        config.validNames.add(nameToAdd)
 
-        CONFIG_HANDLER.save()
+        Configs.superDuperConfig.save()
 
         actor.reply("added $nameToAdd")
     }
@@ -45,11 +45,11 @@ object SilenceMobsCommands {
     @Description("removes a name that triggers mob silencing")
     @CommandPermission("superdupermod.command.silencemobs.names.remove", vanilla = 4)
     fun removeName(actor: FabricCommandActor, @SilenceMobName nameToRemove: String) {
-        val config = CONFIG_HANDLER.get()
+        val config = Configs.superDuperConfig.silenceMobs
 
-        config.silenceMobs.validNames -= nameToRemove
+        config.validNames.remove(nameToRemove)
 
-        CONFIG_HANDLER.save()
+        Configs.superDuperConfig.save()
 
         actor.reply("removed $nameToRemove")
     }
