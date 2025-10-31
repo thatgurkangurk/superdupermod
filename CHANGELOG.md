@@ -10,7 +10,13 @@
 
 ### Fixed
 
-## [0.3.2] - 2025-10-30
+## [0.3.3] - 2025-10-31
+
+### Fixed
+
+- fzzy config is now a dependency in fabric.mod.json
+
+## 0.3.2 - 2025-10-30
 
 ### Fixed
 

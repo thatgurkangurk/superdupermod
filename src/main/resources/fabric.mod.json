@@ -32,14 +32,15 @@
       "@supported_versions@"
     ],
     "fabric-language-kotlin": ">=@fabric_kotlin_version@",
-    "fabric-permissions-api-v0": "*"
+    "fabric-permissions-api-v0": "*",
+    "fzzy-config": ">@fzzy_config_version@"
   },
   "custom": {
     "mc-publish": {
       "modrinth": "super-duper-mod",
       "dependencies": [
         "fabric-permissions-api@>0.5.0(required)#(ignore:curseforge)",
-        "fzzy_config@>@fzzy_config_version@(required)#(ignore:curseforge)"
+        "fzzy-config@>@fzzy_config_version@(required)#(ignore:curseforge)"
       ]
     }
   }
