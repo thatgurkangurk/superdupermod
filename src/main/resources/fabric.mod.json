@@ -33,7 +33,7 @@
     ],
     "fabric-language-kotlin": ">=@fabric_kotlin_version@",
     "fabric-permissions-api-v0": "*",
-    "fzzy-config": ">@fzzy_config_version@"
+    "fzzy_config": ">=@fzzy_config_version@"
   },
   "custom": {
     "mc-publish": {

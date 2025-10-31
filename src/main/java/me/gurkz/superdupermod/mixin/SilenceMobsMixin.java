@@ -9,21 +9,21 @@
 package me.gurkz.superdupermod.mixin;
 
 import me.gurkz.superdupermod.kotlin.mixin.SilenceMob;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.NameTagItem;
-import net.minecraft.util.Hand;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.NameTagItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import net.minecraft.util.ActionResult;
 
 @Mixin(NameTagItem.class)
 public abstract class SilenceMobsMixin {
-    @Inject(method = "useOnEntity", at = @At("HEAD"), cancellable = true)
-    private void silenceEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        SilenceMob.silenceEntity(stack, user, entity, cir);
+    @Inject(method = "interactLivingEntity", at = @At("HEAD"), cancellable = true)
+    private void silenceEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
+        SilenceMob.silenceEntity(itemStack, player, livingEntity, cir);
     }
 }

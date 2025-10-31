@@ -9,27 +9,25 @@
 package me.gurkz.superdupermod.kotlin.mixin
 
 import me.gurkz.superdupermod.config.Configs
-import net.minecraft.component.DataComponentTypes
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemStack
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvents
-import net.minecraft.text.Text
-import net.minecraft.util.ActionResult
+import net.minecraft.core.component.DataComponents
+import net.minecraft.network.chat.Component
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
-
-
 
 object SilenceMob {
     @JvmStatic
-    fun silenceEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, cir: CallbackInfoReturnable<ActionResult>) {
-        val text = stack.get(DataComponentTypes.CUSTOM_NAME);
-        if (text == null || entity is PlayerEntity || user.entityWorld.isClient || !entity.isAlive) {
+    fun silenceEntity(stack: ItemStack, user: Player, entity: LivingEntity, cir: CallbackInfoReturnable<InteractionResult>) {
+        val text = stack.get(DataComponents.CUSTOM_NAME)
+        if (text == null || entity is Player || user.level().isClientSide || !entity.isAlive) {
             return
         }
 
@@ -40,23 +38,23 @@ object SilenceMob {
         }
 
         entity.isSilent = true
-        entity.customName = Text.literal("silenced")
-        entity.addStatusEffect(StatusEffectInstance(StatusEffects.GLOWING, 3 * 20, 0, false, false))
+        entity.customName = Component.literal("silenced")
+        entity.addEffect(MobEffectInstance(MobEffects.GLOWING, 3 * 20, 0, false, false))
 
-        val world = user.entityWorld as? ServerWorld ?: return
-        val position = entity.entityPos
+        val world = user.level() as? ServerLevel ?: return
+        val position = entity.position()
         world.playSound(
             null,
             position.x, position.y, position.z,
-            SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE,
-            SoundCategory.AMBIENT,
+            SoundEvents.AMETHYST_BLOCK_RESONATE,
+            SoundSource.AMBIENT,
             0.8f,
             2.0f
         )
 
-        (entity as? MobEntity)?.setPersistent()
+        (entity as? Mob)?.setPersistenceRequired()
 
-        stack.decrement(1)
-        cir.returnValue = ActionResult.SUCCESS
+        stack.shrink(1)
+        cir.returnValue = InteractionResult.SUCCESS
     }
 }
