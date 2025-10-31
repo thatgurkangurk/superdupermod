@@ -29,6 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FarmBlock.class)
 public abstract class FarmlandMixin {
+
     @Inject(
             method = "fallOn",
             at = @At("HEAD"),
@@ -41,13 +42,16 @@ public abstract class FarmlandMixin {
 
         ItemStack boots = livingEntity.getItemBySlot(EquipmentSlot.FEET);
 
-        Holder<Enchantment> featherHolder = level
+        // Fetch the Feather Falling enchantment holder properly via the registry
+        Holder.Reference<Enchantment> featherHolder = level
                 .registryAccess()
-                .getOrThrow(Registries.ENCHANTMENT)
-                .value().getOrThrow(Enchantments.FEATHER_FALLING);
+                .lookupOrThrow(Registries.ENCHANTMENT)
+                .getOrThrow(Enchantments.FEATHER_FALLING);
 
+        // Get the level of Feather Falling on the boots
         int featherLevel = EnchantmentHelper.getItemEnchantmentLevel(featherHolder, boots);
 
+        // Cancel trampling if Feather Falling or Slow Falling is active
         if (featherLevel > 0 || livingEntity.hasEffect(MobEffects.SLOW_FALLING)) {
             ci.cancel();
         }
