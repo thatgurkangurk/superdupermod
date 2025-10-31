@@ -10,7 +10,13 @@
 
 ### Fixed
 
-## [0.4.1] - 2025-10-31
+## [0.4.2] - 2025-10-31
+
+### Fixed
+
+- fixed crashing when landing on a farmland block
+
+## 0.4.1 - 2025-10-31
 
 ### Fixed
 
