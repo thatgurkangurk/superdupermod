@@ -10,7 +10,13 @@
 
 ### Fixed
 
-## [0.3.3] - 2025-10-31
+## [0.4.0] - 2025-10-31
+
+### Changed
+
+- use mojmaps in preparation of obfuscation being removed in MC (internal change)
+
+## 0.3.3 - 2025-10-31
 
 ### Fixed
 
