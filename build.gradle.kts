@@ -29,6 +29,19 @@ repositories {
     // for more information about repositories.
     maven("https://maven.parchmentmc.org/") { name = "ParchmentMC" } // parchment mappings (https://parchmentmc.org/docs/getting-started)
     maven("https://maven.fzzyhmstrs.me/") { name = "FzzyMaven" } // fzzy config (https://github.com/fzzyhmstrs/fconfig)
+    maven("https://maven.terraformersmc.com/") { name = "Terraformers" } // mod menu
+    maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1") { name = "DevAuth" } // dev auth (https://github.com/DJtheRedstoner/DevAuth)
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = uri("https://api.modrinth.com/maven")
+                name = "Modrinth"
+            }
+        }
+        filter {
+            includeGroup("maven.modrinth")
+        }
+    }
 }
 
 license {
@@ -59,6 +72,7 @@ changelog {
 val lampVersion = property("lamp_version")
 val fabricPermissionsApiVersion = property("fabric_permissions_api_version")
 val fzzyConfigVersion = property("fzzy_config_version")
+val modMenuVersion = property("mod_menu_version")
 
 dependencies {
     minecraft("com.mojang:minecraft:$targetVersion")
@@ -81,6 +95,14 @@ dependencies {
 
     // fabric permissions api
     modImplementation("me.lucko:fabric-permissions-api:$fabricPermissionsApiVersion")
+
+    // mod menu
+    modRuntimeOnly("com.terraformersmc:modmenu:$modMenuVersion")
+
+    // mods that i want for when im testing
+    modRuntimeOnly("maven.modrinth:sodium:mc1.21.9-0.7.0-fabric")
+    modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:1.2.1")
+    modRuntimeOnly("maven.modrinth:jade:20.0.5+fabric")
 }
 
 tasks {
