@@ -5,18 +5,17 @@ import org.jetbrains.changelog.date
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
-    id("fabric-loom") version "1.12-SNAPSHOT"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.fabric.loom)
     id("maven-publish")
-    id("org.jetbrains.kotlin.jvm") version "2.2.0"
-    id("dev.yumi.gradle.licenser") version "2.1.1"
-    id("com.modrinth.minotaur") version "2.+"
-    id("org.jetbrains.changelog") version "2.4.+"
+    alias(libs.plugins.yumiGradleLicenser)
+    alias(libs.plugins.minotaur)
+    alias(libs.plugins.jetbrains.changelog)
     java
 }
 
 val mcVersions = property("supported_versions")!!
 val targetVersion = mcVersions.toString().split(";")[0]
-val fabricKotlinVersion = property("fabric_kotlin_version")!!
 
 group = property("maven_group")!!
 version = property("mod_version")!!
@@ -69,35 +68,29 @@ changelog {
     outputFile = file("release-note.txt")
 }
 
-val lampVersion = property("lamp_version")
-val fabricPermissionsApiVersion = property("fabric_permissions_api_version")
-val fzzyConfigVersion = property("fzzy_config_version")
-val modMenuVersion = property("mod_menu_version")
-
 dependencies {
-    minecraft("com.mojang:minecraft:$targetVersion")
+    minecraft(libs.minecraft)
     mappings(loom.layered {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.21.10:2025.10.12@zip")
+        parchment(libs.parchment)
     })
-    modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
 
-    modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
+    modImplementation(libs.bundles.fabric)
 
     // lamp
-    modImplementation("io.github.revxrsal:lamp.common:$lampVersion")?.let { include(it) }
-    modImplementation("io.github.revxrsal:lamp.fabric:$lampVersion")?.let { include(it) }
-    modImplementation("io.github.revxrsal:lamp.brigadier:$lampVersion")?.let { include(it) }
+    libs.bundles.lamp.get().forEach {
+        modImplementation(it)
+        include(it)
+    }
 
     // fzzy config
-    modImplementation("me.fzzyhmstrs:fzzy_config:$fzzyConfigVersion")
+    modImplementation(libs.fzzyConfig)
 
     // fabric permissions api
-    modImplementation("me.lucko:fabric-permissions-api:$fabricPermissionsApiVersion")
+    modImplementation(libs.fabricPermissionsApi)
 
     // mod menu
-    modRuntimeOnly("com.terraformersmc:modmenu:$modMenuVersion")
+    modRuntimeOnly("com.terraformersmc:modmenu:16.0.0-rc.1")
 
     // mods that i want for when im testing
     modRuntimeOnly("maven.modrinth:sodium:mc1.21.9-0.7.0-fabric")
@@ -113,8 +106,8 @@ tasks {
             filter<ReplaceTokens>("tokens" to mapOf(
                 "supported_versions" to mcVersions.toString().split(";").joinToString("\",\""),
                 "version" to project.version,
-                "fabric_kotlin_version" to fabricKotlinVersion,
-                "fzzy_config_version" to fzzyConfigVersion
+                "fabric_kotlin_version" to libs.versions.fabric.kotlin.get(),
+                "fzzy_config_version" to libs.versions.fzzyConfig.get()
             ))
         }
     }

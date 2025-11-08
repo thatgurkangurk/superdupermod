@@ -1,0 +1,49 @@
+[versions]
+kotlin = "2.2.21"
+
+minecraft = "1.21.10"
+parchment = "2025.10.12"
+
+fabric-loom = "1.13.3"
+fabric-loader = "0.17.3"
+fabric-api = "0.136.0+1.21.10"
+fabric-kotlin = "1.13.6+kotlin.2.2.20"
+
+lamp = "4.0.0-rc.14"
+
+fzzyConfig = "0.7.3+1.21.9"
+
+yumiGradleLicenser = "2.1.1"
+
+minotaur = "2.+"
+
+jetbrains-changelog = "2.4.+"
+
+fabricPermissionsApi = "0.5.0"
+
+[libraries]
+minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft" }
+parchment = { module = "org.parchmentmc.data:parchment-1.21.10", version.ref = "parchment" }
+fabric-api = { group = "net.fabricmc.fabric-api", name = "fabric-api", version.ref = "fabric-api" }
+fabric-loader = { group = "net.fabricmc", name = "fabric-loader", version.ref = "fabric-loader" }
+fabric-kotlin = { group = "net.fabricmc", name = "fabric-language-kotlin", version.ref = "fabric-kotlin" }
+
+lamp-common = { group = "io.github.revxrsal", name = "lamp.common", version.ref = "lamp" }
+lamp-fabric = { group = "io.github.revxrsal", name = "lamp.fabric", version.ref = "lamp" }
+lamp-brigadier = { group = "io.github.revxrsal", name = "lamp.brigadier", version.ref = "lamp" }
+
+fzzyConfig = { group = "me.fzzyhmstrs", name = "fzzy_config", version.ref = "fzzyConfig" }
+
+fabricPermissionsApi = { group = "me.lucko", name = "fabric-permissions-api", version.ref = "fabricPermissionsApi" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+fabric-loom = { id = "fabric-loom", version.ref = "fabric-loom" }
+yumiGradleLicenser = { id = "dev.yumi.gradle.licenser", version.ref = "yumiGradleLicenser" }
+minotaur = { id = "com.modrinth.minotaur", version.ref = "minotaur" }
+jetbrains-changelog = { id = "org.jetbrains.changelog", version.ref = "jetbrains-changelog" }
+
+
+[bundles]
+fabric = ["fabric-loader", "fabric-api", "fabric-kotlin"]
+lamp = ["lamp-common", "lamp-fabric", "lamp-brigadier"]
