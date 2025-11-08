@@ -1,4 +1,6 @@
+import me.modmuss50.mpp.ReleaseType
 import org.apache.tools.ant.filters.ReplaceTokens
+import org.jetbrains.changelog.Changelog
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.changelog.ChangelogSectionUrlBuilder
 import org.jetbrains.changelog.date
@@ -11,6 +13,7 @@ plugins {
     alias(libs.plugins.yumiGradleLicenser)
     alias(libs.plugins.minotaur)
     alias(libs.plugins.jetbrains.changelog)
+    alias(libs.plugins.modPublishPlugin)
     java
 }
 
@@ -68,6 +71,35 @@ changelog {
     outputFile = file("release-note.txt")
 }
 
+fun getChangelog(version: String): String {
+    return changelog.renderItem(
+        changelog.get(version).withSummary(false),
+        Changelog.OutputType.MARKDOWN
+    )
+}
+
+publishMods {
+    val log = getChangelog(project.version.toString())
+    changelog = log
+    type = ReleaseType.STABLE
+
+    file.set(tasks.remapJar.get().archiveFile)
+    modLoaders.add("fabric")
+
+    modrinth {
+        announcementTitle.set(project.version.toString())
+        accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
+        projectId.set("s2RXyQ1L")
+        minecraftVersions.add(targetVersion)
+    }
+
+    github {
+        accessToken.set(providers.environmentVariable("GITHUB_TOKEN"))
+        repository.set("thatgurkangurk/superdupermod")
+        commitish.set("main")
+    }
+}
+
 dependencies {
     minecraft(libs.minecraft)
     mappings(loom.layered {
@@ -104,6 +136,7 @@ tasks {
         filesMatching("fabric.mod.json") {
             expand(getProperties())
             filter<ReplaceTokens>("tokens" to mapOf(
+                "loader_version" to libs.versions.fabric.loader.get(),
                 "supported_versions" to mcVersions.toString().split(";").joinToString("\",\""),
                 "version" to project.version,
                 "fabric_kotlin_version" to libs.versions.fabric.kotlin.get(),
