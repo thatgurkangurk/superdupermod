@@ -44,6 +44,10 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
+    maven {
+        name = "pauli.fyi"
+        url = uri("https://repo.pauli.fyi/releases")
+    }
 }
 
 license {
@@ -90,6 +94,14 @@ publishMods {
         accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
         projectId.set("s2RXyQ1L")
         minecraftVersions.add(targetVersion)
+
+        requires(
+            "fabric-permissions-api",
+            "fabric-language-kotlin",
+            "fabric-api",
+            "fzzy-config",
+            "silk"
+        )
     }
 
     github {
@@ -108,17 +120,14 @@ dependencies {
 
     modImplementation(libs.bundles.fabric)
 
-    // lamp
-    libs.bundles.lamp.get().forEach {
-        modImplementation(it)
-        include(it)
-    }
-
     // fzzy config
     modImplementation(libs.fzzyConfig)
 
     // fabric permissions api
     modImplementation(libs.fabricPermissionsApi)
+
+    // silk
+    modImplementation(libs.bundles.silk)
 
     // mod menu
     modRuntimeOnly("com.terraformersmc:modmenu:16.0.0-rc.1")

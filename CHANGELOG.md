@@ -10,7 +10,13 @@
 
 ### Fixed
 
-## [0.4.3] - 2025-11-08
+## [0.5.0] - 2025-11-08
+
+### Changed
+
+- use Silk instead of Lamp for commands
+
+## 0.4.3 - 2025-11-08
 
 ### Fixed
 

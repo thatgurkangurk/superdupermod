@@ -9,38 +9,18 @@
 package me.gurkz.superdupermod
 
 import me.fzzyhmstrs.fzzy_config.api.ConfigApi
-import me.gurkz.superdupermod.SuperDuperMod.VERSION
-import me.gurkz.superdupermod.command.SilenceMobName
+import me.fzzyhmstrs.fzzy_config.util.FcText.description
 import me.gurkz.superdupermod.command.SilenceMobsCommands
 import me.gurkz.superdupermod.config.Configs
 import me.gurkz.superdupermod.config.SuperDuperConfig
+import me.gurkz.superdupermod.permission.KPermissions
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.FabricLoader
+import net.silkmc.silk.commands.command
+import net.silkmc.silk.core.text.literalText
+import net.silkmc.silk.core.text.sendText
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import revxrsal.commands.annotation.Command
-import revxrsal.commands.annotation.Description
-import revxrsal.commands.autocomplete.SuggestionProvider
-import revxrsal.commands.fabric.FabricLamp
-import revxrsal.commands.fabric.actor.FabricCommandActor
-import revxrsal.commands.fabric.annotation.CommandPermission
-
-// i expect this to be in its own file later
-class SuperDuperModCommand {
-    @Command("superdupermod")
-    @Description("shows info about super duper mod")
-    fun superDuperMod(actor: FabricCommandActor) {
-        actor.reply("hello from super duper mod version ${VERSION}!")
-    }
-
-    @Command("superdupermod reload")
-    @Description("reload superdupermod config")
-    @CommandPermission("superdupermod.command.reload", vanilla = 4)
-    fun reloadCommand(actor: FabricCommandActor) {
-        Configs.superDuperConfig = ConfigApi.readOrCreateAndValidate(::SuperDuperConfig)
-        actor.reply("reloaded config")
-    }
-}
 
 object SuperDuperMod : ModInitializer {
     const val MOD_ID: String = "superdupermod"
@@ -53,18 +33,33 @@ object SuperDuperMod : ModInitializer {
 
     override fun onInitialize() {
         LOGGER.info("hi from super duper mod version $VERSION")
+        registerSuperDuperModCommand()
+        SilenceMobsCommands.registerCommands()
         Configs.superDuperConfig // reference it so it loads
-        val lamp = FabricLamp.builder()
-            .suggestionProviders { providers ->
-                providers.addProviderForAnnotation(SilenceMobName::class.java) { _ ->
-                    SuggestionProvider { _ ->
-                        Configs.superDuperConfig.silenceMobs.validNames.toList()
-                    }
+    }
+
+    private fun registerSuperDuperModCommand() {
+        command("superdupermod") {
+            description("shows info about super duper mod")
+
+            literal("reload") {
+                requires(KPermissions.require("superdupermod.command.reload", 4))
+                runs {
+                    Configs.superDuperConfig = ConfigApi.readOrCreateAndValidate(::SuperDuperConfig)
+                    source.sendSystemMessage(literalText("reloaded config"))
                 }
             }
-            .build()
 
-        lamp.register(SuperDuperModCommand())
-        lamp.register(SilenceMobsCommands)
+            runs {
+                val text = literalText {
+                    color = 0xF21347
+                    text("superdupermod version ")
+                    text(VERSION) {
+                        color = 0x4BD6CB
+                    }
+                }
+                source.playerOrException.sendText(text)
+            }
+        }
     }
 }

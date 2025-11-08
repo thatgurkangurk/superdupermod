@@ -8,49 +8,60 @@
 
 package me.gurkz.superdupermod.command
 
+import com.mojang.brigadier.arguments.StringArgumentType
 import me.gurkz.superdupermod.config.Configs
-import revxrsal.commands.annotation.Command
-import revxrsal.commands.annotation.Description
-import revxrsal.commands.fabric.actor.FabricCommandActor
-import revxrsal.commands.fabric.annotation.CommandPermission
-
-@Target(AnnotationTarget.VALUE_PARAMETER)
-annotation class SilenceMobName()
+import net.silkmc.silk.commands.command
+import net.silkmc.silk.core.text.literalText
 
 object SilenceMobsCommands {
-    @Command("superdupermod silencemobs names list")
-    @Description("lists names that trigger mob silencing")
-    fun listNames(actor: FabricCommandActor) {
-        val config = Configs.superDuperConfig.silenceMobs
+    fun registerCommands() {
+        command("superdupermod") {
+            literal("silencemobs") {
+                literal("names") {
+                    literal("list") runs {
+                        val config = Configs.superDuperConfig.silenceMobs
 
-        val names = config.validNames.joinToString(", ")
+                        val names = config.validNames.joinToString(", ")
 
-        actor.reply("current names are: $names")
-    }
+                        source.sendSystemMessage(literalText("current names are: $names"))
+                    }
 
-    @Command("superdupermod silencemobs names add")
-    @Description("adds a name that triggers mob silencing")
-    @CommandPermission("superdupermod.command.silencemobs.names.add", vanilla = 4)
-    fun addName(actor: FabricCommandActor, nameToAdd: String) {
-        val config = Configs.superDuperConfig.silenceMobs
+                    literal("add") {
+                        argument<String>("nameToAdd", StringArgumentType.greedyString()) { nameToAdd ->
+                            runs {
+                                val config = Configs.superDuperConfig.silenceMobs
 
-        config.validNames.add(nameToAdd)
+                                config.validNames.add(nameToAdd())
 
-        Configs.superDuperConfig.save()
+                                Configs.superDuperConfig.save()
 
-        actor.reply("added $nameToAdd")
-    }
+                                source.sendSystemMessage(literalText("added ${nameToAdd()}"))
 
-    @Command("superdupermod silencemobs names remove")
-    @Description("removes a name that triggers mob silencing")
-    @CommandPermission("superdupermod.command.silencemobs.names.remove", vanilla = 4)
-    fun removeName(actor: FabricCommandActor, @SilenceMobName nameToRemove: String) {
-        val config = Configs.superDuperConfig.silenceMobs
+                            }
+                        }
+                    }
 
-        config.validNames.remove(nameToRemove)
+                    literal("remove") {
+                        argument<String>("nameToRemove", StringArgumentType.greedyString()) { nameToRemove ->
+                            suggestList { Configs.superDuperConfig.silenceMobs.validNames }
+                            runs {
+                                val config = Configs.superDuperConfig.silenceMobs
 
-        Configs.superDuperConfig.save()
+                                if (!config.validNames.contains(nameToRemove())) {
+                                    source.sendFailure(literalText("that name has not been added"))
 
-        actor.reply("removed $nameToRemove")
+                                } else {
+                                    config.validNames.remove(nameToRemove())
+
+                                    Configs.superDuperConfig.save()
+
+                                    source.sendSystemMessage(literalText("removed ${nameToRemove()}"))
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
