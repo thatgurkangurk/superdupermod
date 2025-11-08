@@ -79,8 +79,7 @@ fun getChangelog(version: String): String {
 }
 
 publishMods {
-    val log = getChangelog(project.version.toString())
-    changelog = log
+    changelog = providers.provider { getChangelog(project.version.toString()) }
     type = ReleaseType.STABLE
 
     file.set(tasks.remapJar.get().archiveFile)

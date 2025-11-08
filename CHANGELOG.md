@@ -10,7 +10,13 @@
 
 ### Fixed
 
-## [0.4.2] - 2025-10-31
+## [0.4.3] - 2025-11-08
+
+### Fixed
+
+- test update to test my versioning workflow
+
+## 0.4.2 - 2025-10-31
 
 ### Fixed
 
