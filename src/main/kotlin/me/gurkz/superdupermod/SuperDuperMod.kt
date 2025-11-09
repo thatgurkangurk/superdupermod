@@ -11,6 +11,7 @@ package me.gurkz.superdupermod
 import me.fzzyhmstrs.fzzy_config.api.ConfigApi
 import me.fzzyhmstrs.fzzy_config.util.FcText.description
 import me.gurkz.superdupermod.command.SilenceMobsCommands
+import me.gurkz.superdupermod.command.SmiteCommand
 import me.gurkz.superdupermod.config.Configs
 import me.gurkz.superdupermod.config.SuperDuperConfig
 import me.gurkz.superdupermod.permission.KPermissions
@@ -35,6 +36,7 @@ object SuperDuperMod : ModInitializer {
         LOGGER.info("hi from super duper mod version $VERSION")
         registerSuperDuperModCommand()
         SilenceMobsCommands.registerCommands()
+        SmiteCommand.register()
         Configs.superDuperConfig // reference it so it loads
     }
 

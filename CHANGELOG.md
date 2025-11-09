@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- add a ``/smite`` command
 
 ### Changed
 

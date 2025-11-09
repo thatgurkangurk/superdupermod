@@ -15,11 +15,11 @@ import me.fzzyhmstrs.fzzy_config.api.FileType
 import me.fzzyhmstrs.fzzy_config.config.Config
 import me.fzzyhmstrs.fzzy_config.config.ConfigSection
 import me.gurkz.superdupermod.SuperDuperMod.MOD_ID
-import net.minecraft.resources.ResourceLocation
+import me.gurkz.superdupermod.util.Identifier
 
 @Version(1)
 @ConvertFrom("superdupermod.toml")
-internal class SuperDuperConfig : Config(ResourceLocation.fromNamespaceAndPath(MOD_ID, "super_duper_config")) {
+internal class SuperDuperConfig : Config(Identifier.of(MOD_ID, "super_duper_config")) {
     var silenceMobs = SilenceMobsConfig()
 
     internal class SilenceMobsConfig : ConfigSection() {
