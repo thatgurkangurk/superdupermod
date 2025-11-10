@@ -6,6 +6,7 @@
 - add a ``/smite`` command
 
 ### Changed
+- improve design of ``/superdupermod silencemobs names list``
 
 ### Removed
 

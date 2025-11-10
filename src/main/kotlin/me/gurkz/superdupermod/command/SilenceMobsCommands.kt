@@ -11,6 +11,7 @@ package me.gurkz.superdupermod.command
 import com.mojang.brigadier.arguments.StringArgumentType
 import me.gurkz.superdupermod.config.Configs
 import me.gurkz.superdupermod.permission.KPermissions
+import net.minecraft.network.chat.ClickEvent
 import net.silkmc.silk.commands.command
 import net.silkmc.silk.core.text.literalText
 import kotlin.String
@@ -56,9 +57,21 @@ object SilenceMobsCommands {
     fun registerCommands() = command("superdupermod") {
         literal("silencemobs").literal("names") {
             literal("list") runs {
-                val names = config().silenceMobs.validNames.joinToString(", ")
+                val text = literalText("silence mobs - names (${config().silenceMobs.validNames.size})") {
+                    newLine()
+                    text("======================================")
+                    newLine()
+                    for (validName in config().silenceMobs.validNames) {
+                        text("$validName ")
+                        text("[X]") {
+                            color = 15864647
+                            clickEvent = ClickEvent.SuggestCommand("/superdupermod silencemobs names remove $validName")
+                        }
+                        newLine()
+                    }
+                }
 
-                source.sendSystemMessage(literalText("current names are: $names"))
+                source.sendSystemMessage(text)
             }
         }
         addNameCommand()
