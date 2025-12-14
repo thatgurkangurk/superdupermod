@@ -3,16 +3,26 @@
 ## [Unreleased]
 
 ### Added
-- add a ``/smite`` command
 
 ### Changed
-- improve design of ``/superdupermod silencemobs names list``
 
 ### Removed
 
 ### Fixed
 
-## [0.5.0] - 2025-11-08
+## [0.5.1] - 2025-12-14
+
+- update to 1.21.11
+
+### Added
+
+- add a ``/smite`` command
+
+### Changed
+
+- improve design of ``/superdupermod silencemobs names list``
+
+## 0.5.0 - 2025-11-08
 
 ### Changed
 

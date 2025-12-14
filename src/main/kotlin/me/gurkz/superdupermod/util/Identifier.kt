@@ -8,8 +8,9 @@
 
 package me.gurkz.superdupermod.util
 
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 
+@Deprecated("use net.minecraft.resources.Identifier instead")
 object Identifier {
-    fun of(namespace: String, path: String): ResourceLocation = ResourceLocation.fromNamespaceAndPath(namespace, path)
+    fun of(namespace: String, path: String): Identifier = Identifier.fromNamespaceAndPath(namespace, path)
 }

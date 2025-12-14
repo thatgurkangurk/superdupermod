@@ -115,7 +115,7 @@ dependencies {
     minecraft(libs.minecraft)
     mappings(loom.layered {
         officialMojangMappings()
-        parchment(libs.parchment)
+        //parchment(libs.parchment)
     })
 
     modImplementation(libs.bundles.fabric)
@@ -130,12 +130,12 @@ dependencies {
     modImplementation(libs.bundles.silk)
 
     // mod menu
-    modRuntimeOnly("com.terraformersmc:modmenu:16.0.0-rc.1")
+    //modRuntimeOnly("com.terraformersmc:modmenu:16.0.0-rc.1")
 
     // mods that i want for when im testing
-    modRuntimeOnly("maven.modrinth:sodium:mc1.21.9-0.7.0-fabric")
-    modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:1.2.1")
-    modRuntimeOnly("maven.modrinth:jade:20.0.5+fabric")
+    //modRuntimeOnly("maven.modrinth:sodium:mc1.21.9-0.7.0-fabric")
+    //modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:1.2.1")
+    //modRuntimeOnly("maven.modrinth:jade:20.0.5+fabric")
 }
 
 tasks {
