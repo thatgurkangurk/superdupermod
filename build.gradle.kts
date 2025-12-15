@@ -29,7 +29,7 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
-    maven("https://maven.parchmentmc.org/") { name = "ParchmentMC" } // parchment mappings (https://parchmentmc.org/docs/getting-started)
+    // maven("https://maven.parchmentmc.org/") { name = "ParchmentMC" } // parchment mappings (https://parchmentmc.org/docs/getting-started)
     maven("https://maven.fzzyhmstrs.me/") { name = "FzzyMaven" } // fzzy config (https://github.com/fzzyhmstrs/fconfig)
     maven("https://maven.terraformersmc.com/") { name = "Terraformers" } // mod menu
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1") { name = "DevAuth" } // dev auth (https://github.com/DJtheRedstoner/DevAuth)
@@ -113,10 +113,7 @@ publishMods {
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.layered {
-        officialMojangMappings()
-        //parchment(libs.parchment)
-    })
+    mappings(loom.officialMojangMappings())
 
     modImplementation(libs.bundles.fabric)
 
@@ -130,7 +127,7 @@ dependencies {
     modImplementation(libs.bundles.silk)
 
     // mod menu
-    //modRuntimeOnly("com.terraformersmc:modmenu:16.0.0-rc.1")
+    modRuntimeOnly("com.terraformersmc:modmenu:17.0.0-alpha.1")
 
     // mods that i want for when im testing
     //modRuntimeOnly("maven.modrinth:sodium:mc1.21.9-0.7.0-fabric")
@@ -148,7 +145,8 @@ tasks {
                 "supported_versions" to mcVersions.toString().split(";").joinToString("\",\""),
                 "version" to project.version,
                 "fabric_kotlin_version" to libs.versions.fabric.kotlin.get(),
-                "fzzy_config_version" to libs.versions.fzzyConfig.get()
+                "fzzy_config_version" to libs.versions.fzzyConfig.get(),
+                "silk_version" to libs.versions.silk.get()
             ))
         }
     }
