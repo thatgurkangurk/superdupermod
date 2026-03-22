@@ -3,16 +3,24 @@
 ## [Unreleased]
 
 ### Added
-- silencer stick
 
 ### Changed
 
 ### Removed
-- silencer name tag
 
 ### Fixed
 
-## [0.5.1] - 2025-12-14
+## [0.6.0] - 2026-03-22
+
+### Added
+
+- silencer stick
+
+### Removed
+
+- silencer name tag
+
+## 0.5.1 - 2025-12-14
 
 - update to 1.21.11
 
