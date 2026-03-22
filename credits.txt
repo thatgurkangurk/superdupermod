@@ -1,1 +1,0 @@
-me.gurkz.superdupermod.mixin.SilenceMobsMixin & me.gurkz.superdupermod.kotlin.mixin.SilenceMob: Vanilla Tweaks - https://vanillatweaks.net/

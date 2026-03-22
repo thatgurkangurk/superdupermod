@@ -8,15 +8,11 @@
 
 package me.gurkz.superdupermod
 
-import me.fzzyhmstrs.fzzy_config.api.ConfigApi
-import me.fzzyhmstrs.fzzy_config.util.FcText.description
-import me.gurkz.superdupermod.command.SilenceMobsCommands
 import me.gurkz.superdupermod.command.SmiteCommand
-import me.gurkz.superdupermod.config.Configs
-import me.gurkz.superdupermod.config.SuperDuperConfig
-import me.gurkz.superdupermod.permission.KPermissions
+import me.gurkz.superdupermod.item.ModItems
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.resources.Identifier
 import net.silkmc.silk.commands.command
 import net.silkmc.silk.core.text.literalText
 import net.silkmc.silk.core.text.sendText
@@ -35,23 +31,13 @@ object SuperDuperMod : ModInitializer {
     override fun onInitialize() {
         LOGGER.info("hi from super duper mod version $VERSION")
         registerSuperDuperModCommand()
-        SilenceMobsCommands.registerCommands()
         SmiteCommand.register()
-        Configs.superDuperConfig // reference it so it loads
+
+        ModItems.initialise()
     }
 
     private fun registerSuperDuperModCommand() {
         command("superdupermod") {
-            description("shows info about super duper mod")
-
-            literal("reload") {
-                requires(KPermissions.require("superdupermod.command.reload", 4))
-                runs {
-                    Configs.superDuperConfig = ConfigApi.readOrCreateAndValidate(::SuperDuperConfig)
-                    source.sendSystemMessage(literalText("reloaded config"))
-                }
-            }
-
             runs {
                 val text = literalText {
                     color = 0xF21347
@@ -63,5 +49,9 @@ object SuperDuperMod : ModInitializer {
                 source.playerOrException.sendText(text)
             }
         }
+    }
+
+    fun id(path: String): Identifier {
+        return Identifier.fromNamespaceAndPath(MOD_ID, path)
     }
 }
