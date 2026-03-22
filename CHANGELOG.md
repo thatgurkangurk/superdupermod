@@ -3,18 +3,26 @@
 ## [Unreleased]
 
 ### Added
-- respawn player command ``/superdupermod respawn <player>``
-- server say command ``/superdupermod server-say <message>``
-- glass blocks drop themselves without silk touch
 
 ### Changed
 
 ### Removed
 
 ### Fixed
+
+## [0.7.0] - 2026-03-22
+
+### Added
+
+- respawn player command ``/superdupermod respawn <player>``
+- server say command ``/superdupermod server-say <message>``
+- glass blocks drop themselves without silk touch
+
+### Fixed
+
 - fixed server-say command permission
 
-## [0.6.0] - 2026-03-22
+## 0.6.0 - 2026-03-22
 
 ### Added
 
