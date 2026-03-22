@@ -5,8 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "FarmlandMixin",
-    "LeashableVillagerMixin",
-    "SilenceMobsMixin"
+    "LeashableVillagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

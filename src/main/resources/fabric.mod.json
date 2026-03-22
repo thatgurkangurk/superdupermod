@@ -18,6 +18,18 @@
         "adapter": "kotlin",
         "value": "me.gurkz.superdupermod.SuperDuperMod"
       }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "me.gurkz.superdupermod.client.SuperDuperClient"
+      }
+    ],
+    "fabric-datagen": [
+      {
+        "adapter": "kotlin",
+        "value": "me.gurkz.superdupermod.client.SuperDuperDataGenerator"
+      }
     ]
   },
 
@@ -33,7 +45,6 @@
     ],
     "fabric-language-kotlin": ">=@fabric_kotlin_version@",
     "fabric-permissions-api-v0": "*",
-    "fzzy_config": ">=@fzzy_config_version@",
     "silk-core": ">=@silk_version@",
     "silk-commands": ">=@silk_version@"
   }

@@ -3,10 +3,12 @@
 ## [Unreleased]
 
 ### Added
+- silencer stick
 
 ### Changed
 
 ### Removed
+- silencer name tag
 
 ### Fixed
 

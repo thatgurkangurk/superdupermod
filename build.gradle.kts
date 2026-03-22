@@ -99,7 +99,6 @@ publishMods {
             "fabric-permissions-api",
             "fabric-language-kotlin",
             "fabric-api",
-            "fzzy-config",
             "silk"
         )
     }
@@ -111,14 +110,36 @@ publishMods {
     }
 }
 
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        create("superdupermod") {
+            sourceSet(sourceSets["main"])
+            sourceSet(sourceSets["client"])
+        }
+    }
+
+    runs {
+        named("client") {
+            client()
+            ideConfigGenerated(true)
+            programArg("--username=Dev")
+        }
+    }
+}
+
+fabricApi {
+    configureDataGeneration {
+        client = true
+    }
+}
+
 dependencies {
     minecraft(libs.minecraft)
     mappings(loom.officialMojangMappings())
 
     modImplementation(libs.bundles.fabric)
-
-    // fzzy config
-    modImplementation(libs.fzzyConfig)
 
     // fabric permissions api
     modImplementation(libs.fabricPermissionsApi)
@@ -127,7 +148,7 @@ dependencies {
     modImplementation(libs.bundles.silk)
 
     // mod menu
-    modRuntimeOnly("com.terraformersmc:modmenu:17.0.0-alpha.1")
+    //modRuntimeOnly("com.terraformersmc:modmenu:17.0.0-beta.2")
 
     // mods that i want for when im testing
     //modRuntimeOnly("maven.modrinth:sodium:mc1.21.9-0.7.0-fabric")
@@ -145,7 +166,6 @@ tasks {
                 "supported_versions" to mcVersions.toString().split(";").joinToString("\",\""),
                 "version" to project.version,
                 "fabric_kotlin_version" to libs.versions.fabric.kotlin.get(),
-                "fzzy_config_version" to libs.versions.fzzyConfig.get(),
                 "silk_version" to libs.versions.silk.get()
             ))
         }

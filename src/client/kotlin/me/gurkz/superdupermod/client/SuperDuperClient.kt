@@ -1,15 +1,17 @@
 /*
- * Copyright 2025 Gurkan
+ * Copyright 2026 Gurkan
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-package me.gurkz.superdupermod.config
+package me.gurkz.superdupermod.client
 
-import me.fzzyhmstrs.fzzy_config.api.ConfigApi
+import net.fabricmc.api.ClientModInitializer
 
-internal object Configs {
-    var superDuperConfig = ConfigApi.registerAndLoadConfig(::SuperDuperConfig)
+object SuperDuperClient : ClientModInitializer {
+    override fun onInitializeClient() {
+
+    }
 }
