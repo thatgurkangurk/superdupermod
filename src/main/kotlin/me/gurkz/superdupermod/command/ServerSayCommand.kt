@@ -17,7 +17,7 @@ object ServerSayCommand {
     fun register() {
         command("superdupermod") {
             literal("server-say") {
-                requires(KPermissions.require("superdupermod.command.smite", 4))
+                requires(KPermissions.require("superdupermod.command.server-say", 4))
 
                 argument("message", StringArgumentType.greedyString()) runs {
                     val message = StringArgumentType.getString(this, "message")

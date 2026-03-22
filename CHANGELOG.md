@@ -12,6 +12,7 @@
 ### Removed
 
 ### Fixed
+- fixed server-say command permission
 
 ## [0.6.0] - 2026-03-22
 
