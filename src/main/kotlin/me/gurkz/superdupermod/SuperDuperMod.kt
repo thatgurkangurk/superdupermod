@@ -13,22 +13,12 @@ import me.gurkz.superdupermod.command.SmiteCommand
 import me.gurkz.superdupermod.item.ModItems
 import me.gurkz.superdupermod.network.RespawnPlayer
 import net.fabricmc.api.ModInitializer
-import net.fabricmc.fabric.api.loot.v3.LootTableEvents
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags
 import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.core.registries.Registries
 import net.minecraft.resources.Identifier
-import net.minecraft.resources.ResourceKey
-import net.minecraft.tags.BlockTags
-import net.minecraft.world.level.storage.loot.LootPool
-import net.minecraft.world.level.storage.loot.entries.LootItem
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.silkmc.silk.commands.command
 import net.silkmc.silk.core.text.literalText
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import kotlin.jvm.optionals.getOrNull
 
 
 object SuperDuperMod : ModInitializer {
