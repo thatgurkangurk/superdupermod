@@ -8,7 +8,6 @@
 
 package me.gurkz.superdupermod.item.custom
 
-import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -34,7 +33,6 @@ class SilencerStickItem(properties: Properties) : Item(properties) {
         if (!level.isClientSide) {
             val serverLevel = level as ServerLevel
             entity.isSilent = true
-            entity.customName = Component.literal("silenced")
 
             entity.addEffect(MobEffectInstance(MobEffects.GLOWING, 3 * 20, 0, false, false))
 
@@ -53,6 +51,8 @@ class SilencerStickItem(properties: Properties) : Item(properties) {
             }
 
             stack.hurtAndBreak(1, user, usedHand)
+
+            return InteractionResult.SUCCESS_SERVER
         }
 
         return InteractionResult.SUCCESS
@@ -64,6 +64,10 @@ class SilencerStickItem(properties: Properties) : Item(properties) {
         interactionTarget: LivingEntity,
         usedHand: InteractionHand
     ): InteractionResult {
+        if (interactionTarget is Player) {
+            return InteractionResult.PASS
+        }
+
         return this.silenceEntity(stack, interactionTarget, player, usedHand)
     }
 }
