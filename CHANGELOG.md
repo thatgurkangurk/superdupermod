@@ -5,6 +5,7 @@
 ### Added
 - respawn player command ``/superdupermod respawn <player>``
 - server say command ``/superdupermod server-say <message>``
+- glass blocks drop themselves without silk touch
 
 ### Changed
 
