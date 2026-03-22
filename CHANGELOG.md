@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- respawn player command ``/superdupermod respawn <player>``
 
 ### Changed
 

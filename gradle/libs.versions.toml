@@ -2,6 +2,7 @@
 kotlin = "2.3.10"
 
 minecraft = "1.21.11"
+parchment = "2025.12.20"
 
 fabric-loom = "1.15-SNAPSHOT"
 fabric-loader = "0.18.4"
@@ -22,16 +23,20 @@ silk = "1.11.5"
 
 [libraries]
 minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft" }
+parchment = { module = "org.parchmentmc.data:parchment-1.21.11", version.ref = "parchment" }
 fabric-api = { group = "net.fabricmc.fabric-api", name = "fabric-api", version.ref = "fabric-api" }
 fabric-loader = { group = "net.fabricmc", name = "fabric-loader", version.ref = "fabric-loader" }
 fabric-kotlin = { group = "net.fabricmc", name = "fabric-language-kotlin", version.ref = "fabric-kotlin" }
 
 fabricPermissionsApi = { group = "me.lucko", name = "fabric-permissions-api", version.ref = "fabricPermissionsApi" }
+
 silk-commands = { group = "net.silkmc", name = "silk-commands", version.ref = "silk" }
 silk-core = { group = "net.silkmc", name = "silk-core", version.ref = "silk" }
+silk-network = { group = "net.silkmc", name = "silk-network", version.ref = "silk" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 fabric-loom = { id = "net.fabricmc.fabric-loom-remap", version.ref = "fabric-loom" }
 yumiGradleLicenser = { id = "dev.yumi.gradle.licenser", version.ref = "yumiGradleLicenser" }
 minotaur = { id = "com.modrinth.minotaur", version.ref = "minotaur" }
@@ -41,4 +46,4 @@ modPublishPlugin = { id = "me.modmuss50.mod-publish-plugin", version.ref = "modP
 
 [bundles]
 fabric = ["fabric-loader", "fabric-api", "fabric-kotlin"]
-silk = ["silk-core", "silk-commands"]
+silk = ["silk-core", "silk-commands", "silk-network"]

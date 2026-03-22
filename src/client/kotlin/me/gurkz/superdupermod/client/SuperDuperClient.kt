@@ -8,10 +8,11 @@
 
 package me.gurkz.superdupermod.client
 
+import me.gurkz.superdupermod.client.network.RespawnPlayerClient
 import net.fabricmc.api.ClientModInitializer
 
 object SuperDuperClient : ClientModInitializer {
     override fun onInitializeClient() {
-
+        RespawnPlayerClient.initClient()
     }
 }

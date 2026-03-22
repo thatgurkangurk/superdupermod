@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.fabric.loom)
     id("maven-publish")
     alias(libs.plugins.yumiGradleLicenser)
@@ -29,7 +30,7 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
-    // maven("https://maven.parchmentmc.org/") { name = "ParchmentMC" } // parchment mappings (https://parchmentmc.org/docs/getting-started)
+    maven("https://maven.parchmentmc.org/") { name = "ParchmentMC" } // parchment mappings (https://parchmentmc.org/docs/getting-started)
     maven("https://maven.fzzyhmstrs.me/") { name = "FzzyMaven" } // fzzy config (https://github.com/fzzyhmstrs/fconfig)
     maven("https://maven.terraformersmc.com/") { name = "Terraformers" } // mod menu
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1") { name = "DevAuth" } // dev auth (https://github.com/DJtheRedstoner/DevAuth)
@@ -121,6 +122,14 @@ loom {
     }
 
     runs {
+        named("server") {
+            server()
+
+            runDir("run/server")
+        }
+    }
+
+    runs {
         named("client") {
             client()
             ideConfigGenerated(true)
@@ -137,7 +146,10 @@ fabricApi {
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.officialMojangMappings())
+    mappings(loom.layered {
+        officialMojangMappings()
+        parchment(libs.parchment)
+    })
 
     modImplementation(libs.bundles.fabric)
 

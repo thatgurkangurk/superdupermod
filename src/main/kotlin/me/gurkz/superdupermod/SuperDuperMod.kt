@@ -10,14 +10,15 @@ package me.gurkz.superdupermod
 
 import me.gurkz.superdupermod.command.SmiteCommand
 import me.gurkz.superdupermod.item.ModItems
+import me.gurkz.superdupermod.network.RespawnPlayer
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.resources.Identifier
 import net.silkmc.silk.commands.command
 import net.silkmc.silk.core.text.literalText
-import net.silkmc.silk.core.text.sendText
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+
 
 object SuperDuperMod : ModInitializer {
     const val MOD_ID: String = "superdupermod"
@@ -34,6 +35,8 @@ object SuperDuperMod : ModInitializer {
         SmiteCommand.register()
 
         ModItems.initialise()
+
+        RespawnPlayer.initServer()
     }
 
     private fun registerSuperDuperModCommand() {
@@ -46,7 +49,7 @@ object SuperDuperMod : ModInitializer {
                         color = 0x4BD6CB
                     }
                 }
-                source.playerOrException.sendText(text)
+                source.sendSystemMessage(text)
             }
         }
     }
