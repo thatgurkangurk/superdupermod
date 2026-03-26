@@ -17,22 +17,20 @@ import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.resources.Identifier
 import net.silkmc.silk.commands.command
+import net.silkmc.silk.core.logging.logger
 import net.silkmc.silk.core.text.literalText
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-
 
 object SuperDuperMod : ModInitializer {
     const val MOD_ID: String = "superdupermod"
+    private val logger = logger()
     private val loader: FabricLoader = FabricLoader.getInstance()
-    private val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
     val VERSION: String = loader.getModContainer(MOD_ID).map {
         container ->
             container.metadata.version.friendlyString
     }.orElse("unknown version")
 
     override fun onInitialize() {
-        LOGGER.info("hi from super duper mod version $VERSION")
+        logger.info("hi from super duper mod version $VERSION")
         registerSuperDuperModCommand()
         SmiteCommand.register()
         ServerSayCommand.register()
@@ -53,7 +51,7 @@ object SuperDuperMod : ModInitializer {
                         color = 0x4BD6CB
                     }
                 }
-                source.sendSystemMessage(text)
+                source.sendSuccess({ text }, true)
             }
         }
     }
