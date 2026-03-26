@@ -6,6 +6,7 @@
 - backport of the `/swing` command from minecraft 26.1
 
 ### Changed
+- add an error message to ``/superdupermod respawn`` if the target is alive
 
 ### Removed
 
