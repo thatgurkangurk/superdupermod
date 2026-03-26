@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- backport of the `/swing` command from minecraft 26.1
 
 ### Changed
 

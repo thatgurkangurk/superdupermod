@@ -10,6 +10,7 @@ package me.gurkz.superdupermod
 
 import me.gurkz.superdupermod.command.ServerSayCommand
 import me.gurkz.superdupermod.command.SmiteCommand
+import me.gurkz.superdupermod.command.SwingCommand
 import me.gurkz.superdupermod.item.ModItems
 import me.gurkz.superdupermod.network.RespawnPlayer
 import net.fabricmc.api.ModInitializer
@@ -35,6 +36,7 @@ object SuperDuperMod : ModInitializer {
         registerSuperDuperModCommand()
         SmiteCommand.register()
         ServerSayCommand.register()
+        SwingCommand.register()
 
         ModItems.initialise()
 
