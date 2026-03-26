@@ -11,9 +11,10 @@ package me.gurkz.superdupermod.network
 import kotlinx.serialization.Serializable
 import me.gurkz.superdupermod.SuperDuperMod
 import me.gurkz.superdupermod.permission.KPermissions
+import net.minecraft.ChatFormatting
 import net.minecraft.commands.arguments.EntityArgument
-import net.minecraft.network.chat.Component
 import net.silkmc.silk.commands.command
+import net.silkmc.silk.core.text.literalText
 import net.silkmc.silk.network.packet.s2cPacket
 
 object RespawnPlayer {
@@ -35,11 +36,26 @@ object RespawnPlayer {
                     runs {
                         val target = player().findSinglePlayer(source)
 
+                        if (target.isAlive) {
+                            val text = literalText("could not respawn ") {
+                                color = ChatFormatting.RED.color
+                                text(target.displayName!!)
+                                text(", they are alive")
+                            }
+
+                            source.sendFailure(text)
+                            return@runs
+                        }
+
                         val requester = source.textName
 
                         respawnPlayerPacketS2C.send(RespawnPlayerPacket(requester), target)
 
-                        source.sendSystemMessage(Component.literal("respawning ${target.name.string}"))
+                        val text = literalText("respawning ") {
+                            text(target.displayName!!)
+                        }
+
+                        source.sendSuccess({ text }, true)
                     }
                 }
             }
