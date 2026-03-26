@@ -1,4 +1,5 @@
 import me.modmuss50.mpp.ReleaseType
+import net.fabricmc.loom.task.FabricModJsonV1Task
 import org.apache.tools.ant.filters.ReplaceTokens
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -160,7 +161,7 @@ dependencies {
     modImplementation(libs.bundles.silk)
 
     // mod menu
-    //modRuntimeOnly("com.terraformersmc:modmenu:17.0.0-beta.2")
+    modRuntimeOnly("com.terraformersmc:modmenu:17.0.0")
 
     // mods that i want for when im testing
     //modRuntimeOnly("maven.modrinth:sodium:mc1.21.9-0.7.0-fabric")
@@ -168,19 +169,49 @@ dependencies {
     //modRuntimeOnly("maven.modrinth:jade:20.0.5+fabric")
 }
 
+tasks.register<FabricModJsonV1Task>("generateModJson") {
+    outputFile = file(layout.buildDirectory.file("resources/main/fabric.mod.json"))
+
+    json {
+        modId = "superdupermod"
+        version = project.version.toString()
+
+        name = "Super Duper Mod"
+        description = "a super duper amazing mod"
+        author {
+            name = "Gurkan"
+        }
+        licenses.add("MPL-2.0")
+        icon("./assets/icon.png")
+        environment = "*"
+
+
+        entrypoint("main", "me.gurkz.superdupermod.SuperDuperMod", "kotlin")
+        entrypoint("client", "me.gurkz.superdupermod.client.SuperDuperClient", "kotlin")
+        entrypoint("fabric-datagen", "me.gurkz.superdupermod.client.SuperDuperDataGenerator", "kotlin")
+
+        mixin("superdupermod.mixins.json")
+
+        depends("fabricloader", ">=${libs.versions.fabric.loader.get()}")
+        depends("fabric-api", ">=${libs.versions.fabric.api.get()}")
+        depends("fabric-language-kotlin", ">=${libs.versions.fabric.kotlin.get()}")
+        depends("fabric-permissions-api-v0", "*")
+
+        depends("minecraft", mcVersions.toString().split(";"))
+
+        libs.bundles.silk.get().forEach { dep ->
+            depends(
+                dep.module.name,
+                ">=${libs.versions.silk.get()}"
+            )
+        }
+    }
+}
+
 tasks {
     processResources {
+        dependsOn("generateModJson")
         inputs.property("version", project.version)
-        filesMatching("fabric.mod.json") {
-            expand(getProperties())
-            filter<ReplaceTokens>("tokens" to mapOf(
-                "loader_version" to libs.versions.fabric.loader.get(),
-                "supported_versions" to mcVersions.toString().split(";").joinToString("\",\""),
-                "version" to project.version,
-                "fabric_kotlin_version" to libs.versions.fabric.kotlin.get(),
-                "silk_version" to libs.versions.silk.get()
-            ))
-        }
     }
 
     jar {
