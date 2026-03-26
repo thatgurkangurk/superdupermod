@@ -11,6 +11,7 @@ package me.gurkz.superdupermod.command
 import com.mojang.brigadier.arguments.StringArgumentType
 import me.gurkz.superdupermod.permission.KPermissions
 import net.silkmc.silk.commands.command
+import net.silkmc.silk.core.text.broadcastText
 import net.silkmc.silk.core.text.literalText
 
 object ServerSayCommand {
@@ -27,7 +28,7 @@ object ServerSayCommand {
                         text(message)
                     }
 
-                    source.server.sendSystemMessage(text)
+                    source.server.broadcastText(text)
                 }
             }
         }

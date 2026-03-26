@@ -10,6 +10,7 @@
 ### Removed
 
 ### Fixed
+- fix the ``/superdupermod server-say`` command
 
 ## [0.7.0] - 2026-03-22
 
