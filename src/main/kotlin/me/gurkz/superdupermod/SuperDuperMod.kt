@@ -10,6 +10,7 @@ package me.gurkz.superdupermod
 
 import me.gurkz.superdupermod.command.ServerSayCommand
 import me.gurkz.superdupermod.command.SmiteCommand
+import me.gurkz.superdupermod.command.SuicideCommand
 import me.gurkz.superdupermod.command.SwingCommand
 import me.gurkz.superdupermod.item.ModItems
 import me.gurkz.superdupermod.network.RespawnPlayer
@@ -32,9 +33,11 @@ object SuperDuperMod : ModInitializer {
     override fun onInitialize() {
         logger.info("hi from super duper mod version $VERSION")
         registerSuperDuperModCommand()
+
         SmiteCommand.register()
         ServerSayCommand.register()
         SwingCommand.register()
+        SuicideCommand.register()
 
         ModItems.initialise()
 

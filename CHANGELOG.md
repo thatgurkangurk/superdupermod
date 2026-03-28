@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- ``/suicide`` command to immediately respawn
 - backport of the `/swing` command from minecraft 26.1
 
 ### Changed

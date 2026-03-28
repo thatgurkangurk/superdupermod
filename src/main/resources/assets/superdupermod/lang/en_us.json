@@ -1,3 +1,4 @@
 {
-  "item.superdupermod.silencer_stick": "Silencer Stick"
+  "item.superdupermod.silencer_stick": "Silencer Stick",
+  "death.attack.suicide": "%1$s committed suicide"
 }
