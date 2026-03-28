@@ -8,72 +8,21 @@
 
 package me.gurkz.superdupermod.command
 
-import it.unimi.dsi.fastutil.ints.IntArrayList
 import me.gurkz.superdupermod.SuperDuperMod
 import me.gurkz.superdupermod.permission.KPermissions
-import net.minecraft.core.component.DataComponents
+import me.gurkz.superdupermod.util.FireworkUtil
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
-import net.minecraft.server.level.ServerLevel
-import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.damagesource.DamageType
-import net.minecraft.world.entity.projectile.FireworkRocketEntity
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
-import net.minecraft.world.item.component.FireworkExplosion
-import net.minecraft.world.item.component.Fireworks
 import net.minecraft.world.level.GameType
-import net.minecraft.world.phys.Vec3
 import net.silkmc.silk.commands.PermissionLevel
 import net.silkmc.silk.commands.command
 import net.silkmc.silk.core.entity.pos
-import net.silkmc.silk.core.logging.logger
 import net.silkmc.silk.core.text.literalText
 
 object SuicideCommand {
     val suicideDamageType: ResourceKey<DamageType> = ResourceKey.create(Registries.DAMAGE_TYPE, SuperDuperMod.id("suicide"))
-
-    private fun createColor(red: Int, green: Int, blue: Int): Int {
-        return (red shl 16) or (green shl 8) or blue
-    }
-
-    private fun summonFirework(pos: Vec3, level: ServerLevel) {
-        try {
-            val explosion = FireworkExplosion(
-                FireworkExplosion.Shape.LARGE_BALL,
-                IntArrayList(intArrayOf(
-                    createColor(0, 255, 0)
-                )),
-                IntArrayList(intArrayOf(
-                    createColor(255, 0, 0)
-                )),
-                true,
-                true
-            )
-
-            val fireworks = Fireworks(
-                Mth.clamp(2, 0, 3),
-                listOf(explosion),
-            )
-
-            val stack = ItemStack(Items.FIREWORK_ROCKET)
-            stack.set(DataComponents.FIREWORKS, fireworks)
-
-            val rocket = FireworkRocketEntity(
-                level,
-                pos.x,
-                pos.y,
-                pos.z,
-                stack
-            )
-
-            level.addFreshEntity(rocket)
-
-        } catch (e: IllegalArgumentException) {
-            logger().error("something went wrong ${e.message}")
-        }
-    }
 
     fun register() {
         command("suicide") {
@@ -100,7 +49,13 @@ object SuicideCommand {
 
                 val pos = player.pos
 
-                summonFirework(pos, source.level)
+                FireworkUtil.summonFirework(
+                    pos,
+                    source.level,
+                    FireworkUtil.createColour(0, 255, 0),
+                    FireworkUtil.createColour(255, 0, 0),
+                    2
+                )
 
                 player.hurtServer(source.level, damageSource, 20.0f)
             }
