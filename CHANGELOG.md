@@ -3,19 +3,30 @@
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+### Fixed
+
+## [1.0.0] - 2026-03-29
+
+### Added
+
 - ``/offline-tp`` command to teleport to a player's log out location
 - ``/suicide`` command to immediately respawn
 - backport of the `/swing` command from minecraft 26.1
 
 ### Changed
+
 - add an error message to ``/superdupermod respawn`` if the target is alive
 
-### Removed
-
 ### Fixed
+
 - fix the ``/superdupermod server-say`` command
 
-## [0.7.0] - 2026-03-22
+## 0.7.0 - 2026-03-22
 
 ### Added
 

@@ -96,8 +96,9 @@ publishMods {
         projectId.set("s2RXyQ1L")
         minecraftVersions.add(targetVersion)
 
+        embeds("fabric-permissions-api")
+
         requires(
-            "fabric-permissions-api",
             "fabric-language-kotlin",
             "fabric-api",
             "silk"
