@@ -1,6 +1,5 @@
 import me.modmuss50.mpp.ReleaseType
 import net.fabricmc.loom.task.FabricModJsonV1Task
-import org.apache.tools.ant.filters.ReplaceTokens
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.changelog.ChangelogSectionUrlBuilder
@@ -11,7 +10,6 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.fabric.loom)
-    id("maven-publish")
     alias(libs.plugins.yumiGradleLicenser)
     alias(libs.plugins.minotaur)
     alias(libs.plugins.jetbrains.changelog)
@@ -74,7 +72,7 @@ changelog {
     groups = listOf("Added", "Changed", "Removed", "Fixed")
     lineSeparator = "\n"
     combinePreReleases = true
-    sectionUrlBuilder = ChangelogSectionUrlBuilder { repositoryUrl, currentVersion, previousVersion, isUnreleased -> "foo" }
+    sectionUrlBuilder = ChangelogSectionUrlBuilder { _, _, _, _ -> "foo" }
     outputFile = file("release-note.txt")
 }
 
@@ -148,6 +146,8 @@ fabricApi {
 
 dependencies {
     minecraft(libs.minecraft)
+
+    @Suppress("UnstableApiUsage")
     mappings(loom.layered {
         officialMojangMappings()
         parchment(libs.parchment)
@@ -220,25 +220,6 @@ tasks {
 
     jar {
         from("LICENSE")
-    }
-
-    publishing {
-        publications {
-            create<MavenPublication>("mavenJava") {
-                artifact(remapJar) {
-                    builtBy(remapJar)
-                }
-                artifact(kotlinSourcesJar) {
-                    builtBy(remapSourcesJar)
-                }
-            }
-        }
-
-        // select the repositories you want to publish to
-        repositories {
-            // uncomment to publish to the local maven
-            // mavenLocal()
-        }
     }
 }
 
