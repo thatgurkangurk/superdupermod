@@ -8,10 +8,12 @@
 
 package me.gurkz.superdupermod
 
+import me.gurkz.superdupermod.command.OfflineTpCommand
 import me.gurkz.superdupermod.command.ServerSayCommand
 import me.gurkz.superdupermod.command.SmiteCommand
 import me.gurkz.superdupermod.command.SuicideCommand
 import me.gurkz.superdupermod.command.SwingCommand
+import me.gurkz.superdupermod.event.OfflineTpEventListeners
 import me.gurkz.superdupermod.item.ModItems
 import me.gurkz.superdupermod.network.RespawnPlayer
 import net.fabricmc.api.ModInitializer
@@ -38,6 +40,8 @@ object SuperDuperMod : ModInitializer {
         ServerSayCommand.register()
         SwingCommand.register()
         SuicideCommand.register()
+        OfflineTpCommand.register()
+        OfflineTpEventListeners.register()
 
         ModItems.initialise()
 

@@ -19,6 +19,8 @@ fabricPermissionsApi = "0.6.1"
 
 modPublishPlugin = "1.1.0"
 
+playerDataApi = "0.9.1+1.21.11"
+
 silk = "1.11.5"
 
 [libraries]
@@ -33,6 +35,8 @@ fabricPermissionsApi = { group = "me.lucko", name = "fabric-permissions-api", ve
 silk-commands = { group = "net.silkmc", name = "silk-commands", version.ref = "silk" }
 silk-core = { group = "net.silkmc", name = "silk-core", version.ref = "silk" }
 silk-network = { group = "net.silkmc", name = "silk-network", version.ref = "silk" }
+
+playerDataApi = { group = "eu.pb4", name = "player-data-api", version.ref = "playerDataApi" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

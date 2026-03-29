@@ -46,6 +46,7 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
+    maven("https://maven.nucleoid.xyz") // player data api
     maven {
         name = "pauli.fyi"
         url = uri("https://repo.pauli.fyi/releases")
@@ -162,6 +163,9 @@ dependencies {
 
     // mod menu
     modRuntimeOnly("com.terraformersmc:modmenu:17.0.0")
+
+    modImplementation(libs.playerDataApi)
+    include(libs.playerDataApi)
 
     // mods that i want for when im testing
     //modRuntimeOnly("maven.modrinth:sodium:mc1.21.9-0.7.0-fabric")

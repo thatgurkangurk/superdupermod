@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- ``/offline-tp`` command to teleport to a player's log out location
 - ``/suicide`` command to immediately respawn
 - backport of the `/swing` command from minecraft 26.1
 
