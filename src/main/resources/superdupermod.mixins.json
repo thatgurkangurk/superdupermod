@@ -7,7 +7,8 @@
     "FarmlandMixin",
     "GlassDropMixin",
     "LeashableVillagerMixin",
-    "PlayerDeathMixin"
+    "PlayerDeathMixin",
+    "ServerAccessorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

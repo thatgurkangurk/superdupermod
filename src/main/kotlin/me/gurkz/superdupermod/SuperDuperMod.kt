@@ -12,8 +12,8 @@ import me.gurkz.superdupermod.command.OfflineTpCommand
 import me.gurkz.superdupermod.command.ServerSayCommand
 import me.gurkz.superdupermod.command.SmiteCommand
 import me.gurkz.superdupermod.command.SuicideCommand
+import me.gurkz.superdupermod.command.TpaCommands
 import me.gurkz.superdupermod.data.DataStorages
-import me.gurkz.superdupermod.data.DeathLocationData
 import me.gurkz.superdupermod.event.DeathLocationEventListeners
 import me.gurkz.superdupermod.event.OfflineTpEventListeners
 import me.gurkz.superdupermod.item.ModItems
@@ -43,6 +43,7 @@ object SuperDuperMod : ModInitializer {
         SuicideCommand.register()
         OfflineTpCommand.register()
         OfflineTpEventListeners.register()
+        TpaCommands.register()
 
         DataStorages.register()
         DeathLocationEventListeners.register()

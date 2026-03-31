@@ -4,6 +4,7 @@
 
 ### Added
 - add a ``/lastdeath`` command (superdupermod.command.lastdeath) permission
+- add ``/tpa``, (accept,deny,cancel) commands
 
 ### Changed
 

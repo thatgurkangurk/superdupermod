@@ -10,7 +10,6 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.fabric.loom)
     alias(libs.plugins.yumiGradleLicenser)
-    alias(libs.plugins.minotaur)
     alias(libs.plugins.jetbrains.changelog)
     alias(libs.plugins.modPublishPlugin)
     java
@@ -138,6 +137,7 @@ dependencies {
 
     // fabric permissions api
     implementation(libs.fabricPermissionsApi)
+    include(libs.fabricPermissionsApi)
 
     // silk
     implementation(libs.bundles.silk)
