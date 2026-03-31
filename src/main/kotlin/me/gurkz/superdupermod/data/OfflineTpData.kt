@@ -8,11 +8,4 @@
 
 package me.gurkz.superdupermod.data
 
-import net.minecraft.resources.Identifier
-import net.minecraft.world.phys.Vec3
-
-data class OfflineTpData(
-    val leavePosition: Vec3 = Vec3.ZERO,
-    val cameraVector: Vec3 = Vec3.ZERO,
-    val dimension: Identifier? = null
-)
+data class OfflineTpData(val location: Location)

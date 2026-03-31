@@ -13,8 +13,11 @@ import eu.pb4.playerdata.api.storage.JsonDataStorage
 
 object DataStorages {
     val DEATH_LOCATION = JsonDataStorage("death_location", DeathLocationData::class.java)
+    val OFFLINE_TP = JsonDataStorage("offline_tp", OfflineTpData::class.java)
+
 
     fun register() {
         PlayerDataApi.register(DEATH_LOCATION)
+        PlayerDataApi.register(OFFLINE_TP)
     }
 }
