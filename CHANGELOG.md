@@ -10,7 +10,17 @@
 
 ### Fixed
 
-## [1.0.0] - 2026-03-29
+## [1.1.0] - 2026-03-31
+
+### Changed
+
+- update to minecraft 26.1
+
+### Removed
+
+- superdupermod's ``/swing`` command
+
+## 1.0.0 - 2026-03-29
 
 ### Added
 

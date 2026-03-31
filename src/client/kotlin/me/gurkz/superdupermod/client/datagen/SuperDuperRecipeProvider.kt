@@ -9,10 +9,9 @@
 package me.gurkz.superdupermod.client.datagen
 
 import me.gurkz.superdupermod.item.ModItems
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.registries.Registries
 import net.minecraft.data.recipes.RecipeCategory
 import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.RecipeProvider
@@ -22,7 +21,7 @@ import java.util.concurrent.CompletableFuture
 
 
 class SuperDuperRecipeProvider(
-    output: FabricDataOutput,
+    output: FabricPackOutput,
     registriesFuture: CompletableFuture<HolderLookup.Provider>
 ) : FabricRecipeProvider(output, registriesFuture) {
 
@@ -36,8 +35,6 @@ class SuperDuperRecipeProvider(
     ): RecipeProvider {
         return object : RecipeProvider(registryLookup, exporter) {
             override fun buildRecipes() {
-                val itemLookup = registries.lookupOrThrow(Registries.ITEM)
-
                 shaped(RecipeCategory.TOOLS, ModItems.SILENCER_STICK, 1)
                     .pattern("W  ")
                     .pattern(" A ")

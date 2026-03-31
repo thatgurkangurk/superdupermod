@@ -87,7 +87,7 @@ publishMods {
     changelog = providers.provider { getChangelog(project.version.toString()) }
     type = ReleaseType.STABLE
 
-    file.set(tasks.remapJar.get().archiveFile)
+    file.set(tasks.jar.get().archiveFile)
     modLoaders.add("fabric")
 
     modrinth {
@@ -148,24 +148,18 @@ fabricApi {
 dependencies {
     minecraft(libs.minecraft)
 
-    @Suppress("UnstableApiUsage")
-    mappings(loom.layered {
-        officialMojangMappings()
-        parchment(libs.parchment)
-    })
-
-    modImplementation(libs.bundles.fabric)
+    implementation(libs.bundles.fabric)
 
     // fabric permissions api
-    modImplementation(libs.fabricPermissionsApi)
+    implementation(libs.fabricPermissionsApi)
 
     // silk
-    modImplementation(libs.bundles.silk)
+    implementation(libs.bundles.silk)
 
     // mod menu
-    modRuntimeOnly("com.terraformersmc:modmenu:17.0.0")
+    runtimeOnly("com.terraformersmc:modmenu:18.0.0-alpha.8")
 
-    modImplementation(libs.playerDataApi)
+    implementation(libs.playerDataApi)
     include(libs.playerDataApi)
 
     // mods that i want for when im testing
@@ -238,7 +232,7 @@ tasks.withType<KotlinJvmCompile> {
 
 kotlin {
     compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_21)
+        jvmTarget.set(JvmTarget.JVM_25)
     }
 }
 
