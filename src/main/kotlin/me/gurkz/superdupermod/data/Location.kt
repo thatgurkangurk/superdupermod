@@ -14,7 +14,6 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.phys.Vec3
 import net.silkmc.silk.core.entity.serverWorld
-import net.silkmc.silk.core.logging.logger
 import kotlin.math.asin
 import kotlin.math.atan2
 
@@ -25,7 +24,6 @@ data class Location(
 )
 
 fun Location.teleportPlayerHere(player: ServerPlayer): Result<Unit> {
-    val logger = logger()
     val server = player.serverWorld.server ?: return Result.failure(Exception("server was not found"))
     val dimensionIdentifier = this.dimension ?: Identifier.withDefaultNamespace("overworld")
     val level = server.getLevel(ResourceKey.create(Registries.DIMENSION, dimensionIdentifier)) ?: return Result.failure(
