@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- add a ``/lastdeath`` command (superdupermod.command.lastdeath) permission
 
 ### Changed
 
