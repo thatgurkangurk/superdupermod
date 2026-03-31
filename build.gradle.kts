@@ -17,9 +17,6 @@ plugins {
     java
 }
 
-val mcVersions = property("supported_versions")!!
-val targetVersion = mcVersions.toString().split(";")[0]
-
 group = property("maven_group")!!
 version = property("mod_version")!!
 
@@ -29,10 +26,8 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
-    maven("https://maven.parchmentmc.org/") { name = "ParchmentMC" } // parchment mappings (https://parchmentmc.org/docs/getting-started)
     maven("https://maven.fzzyhmstrs.me/") { name = "FzzyMaven" } // fzzy config (https://github.com/fzzyhmstrs/fconfig)
     maven("https://maven.terraformersmc.com/") { name = "Terraformers" } // mod menu
-    maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1") { name = "DevAuth" } // dev auth (https://github.com/DJtheRedstoner/DevAuth)
     exclusiveContent {
         forRepository {
             maven {
@@ -94,7 +89,7 @@ publishMods {
         announcementTitle.set(project.version.toString())
         accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
         projectId.set("s2RXyQ1L")
-        minecraftVersions.add(targetVersion)
+        minecraftVersions.add(libs.versions.minecraft.get())
 
         embeds("fabric-permissions-api")
 
@@ -196,7 +191,7 @@ tasks.register<FabricModJsonV1Task>("generateModJson") {
         depends("fabric-language-kotlin", ">=${libs.versions.fabric.kotlin.get()}")
         depends("fabric-permissions-api-v0", "*")
 
-        depends("minecraft", mcVersions.toString().split(";"))
+        depends("minecraft", "~${libs.versions.minecraft.get()}")
 
         libs.bundles.silk.get().forEach { dep ->
             depends(
