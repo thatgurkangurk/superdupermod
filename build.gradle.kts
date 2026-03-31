@@ -4,7 +4,6 @@ import org.jetbrains.changelog.Changelog
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.changelog.ChangelogSectionUrlBuilder
 import org.jetbrains.changelog.date
-import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -21,12 +20,6 @@ group = property("maven_group")!!
 version = property("mod_version")!!
 
 repositories {
-    // Add repositories to retrieve artifacts from in here.
-    // You should only use this when depending on other mods because
-    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-    // for more information about repositories.
-    maven("https://maven.fzzyhmstrs.me/") { name = "FzzyMaven" } // fzzy config (https://github.com/fzzyhmstrs/fconfig)
     maven("https://maven.terraformersmc.com/") { name = "Terraformers" } // mod menu
     exclusiveContent {
         forRepository {
@@ -47,13 +40,11 @@ repositories {
 }
 
 license {
-    // Add a license header rule, at least one must be present.
     rule(file("codeformat/HEADER"))
 
-    // Exclude/include certain file types, defaults are provided to easily deal with Java/Kotlin projects.
-    include("**/*.java") // Include Java files into the file resolution.
-    include("**/*.kt") // Include Java files into the file resolution.
-    exclude("**/*.properties") // Exclude properties files from the file resolution.
+    include("**/*.java")
+    include("**/*.kt")
+    exclude("**/*.properties")
 }
 
 changelog {
@@ -156,11 +147,6 @@ dependencies {
 
     implementation(libs.playerDataApi)
     include(libs.playerDataApi)
-
-    // mods that i want for when im testing
-    //modRuntimeOnly("maven.modrinth:sodium:mc1.21.9-0.7.0-fabric")
-    //modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:1.2.1")
-    //modRuntimeOnly("maven.modrinth:jade:20.0.5+fabric")
 }
 
 tasks.register<FabricModJsonV1Task>("generateModJson") {
@@ -213,27 +199,13 @@ tasks {
     }
 }
 
-tasks.withType<JavaCompile> {
-    // Preserve parameter names in the bytecode
-    options.compilerArgs.add("-parameters")
-}
-
-// optional: if you're using Kotlin
-tasks.withType<KotlinJvmCompile> {
+kotlin {
     compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_25)
         javaParameters = true
     }
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_25)
-    }
-}
-
 java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
     withSourcesJar()
 }
