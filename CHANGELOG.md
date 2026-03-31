@@ -3,8 +3,6 @@
 ## [Unreleased]
 
 ### Added
-- add a ``/lastdeath`` command (superdupermod.command.lastdeath) permission
-- add ``/tpa``, (accept,deny,cancel) commands
 
 ### Changed
 
@@ -12,7 +10,14 @@
 
 ### Fixed
 
-## [1.1.0] - 2026-03-31
+## [1.2.0] - 2026-03-31
+
+### Added
+
+- add a ``/lastdeath`` command (superdupermod.command.lastdeath) permission
+- add ``/tpa``, (accept,deny,cancel) commands
+
+## 1.1.0 - 2026-03-31
 
 ### Changed
 
