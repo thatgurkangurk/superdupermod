@@ -14,9 +14,6 @@ jobs:
           distribution: 'zulu'
           java-version: '25'
           cache: 'gradle'
-          cache-dependency-path: | # optional
-            sub-project/*.gradle*
-            sub-project/**/gradle-wrapper.properties
       - run: ./gradlew build publishMods --no-daemon
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
