@@ -18,9 +18,15 @@ import me.gurkz.superdupermod.event.DeathLocationEventListeners
 import me.gurkz.superdupermod.event.OfflineTpEventListeners
 import me.gurkz.superdupermod.item.ModItems
 import me.gurkz.superdupermod.network.RespawnPlayer
+import me.gurkz.superdupermod.video.VideoCommands
+import me.gurkz.superdupermod.video.VideoDialogueRegistry
+import me.gurkz.superdupermod.video.VideoPlayer
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.resources.Identifier
+import net.minecraft.server.packs.PackType
 import net.silkmc.silk.commands.command
 import net.silkmc.silk.core.logging.logger
 import net.silkmc.silk.core.text.literalText
@@ -51,6 +57,16 @@ object SuperDuperMod : ModInitializer {
         ModItems.initialise()
 
         RespawnPlayer.initServer()
+
+        ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(Identifier.fromNamespaceAndPath(MOD_ID, "video_dialogue_registry"),
+            VideoDialogueRegistry
+        )
+
+        ServerTickEvents.END_SERVER_TICK.register {
+            VideoPlayer.tick()
+        }
+
+        VideoCommands.register()
     }
 
     private fun registerSuperDuperModCommand() {
