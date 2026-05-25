@@ -244,3 +244,7 @@ java {
 tasks.named<Jar>("sourcesJar") {
     dependsOn("compileJava", "compileKotlin")
 }
+
+tasks.matching { it.name.startsWith("checkLicense") }.configureEach {
+    mustRunAfter(tasks.withType<JavaCompile>())
+}
