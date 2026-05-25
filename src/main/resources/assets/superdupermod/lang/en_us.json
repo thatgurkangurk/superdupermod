@@ -1,4 +1,5 @@
 {
   "item.superdupermod.silencer_stick": "Silencer Stick",
-  "death.attack.suicide": "%1$s committed suicide"
+  "death.attack.suicide": "%1$s committed suicide",
+  "config.jade.plugin_superdupermod.pet_cooldown": "Pet Cooldown"
 }

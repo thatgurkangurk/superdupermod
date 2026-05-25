@@ -153,6 +153,8 @@ dependencies {
 
     implementation(libs.owo)
     include(libs.owo.sentinel)
+
+    implementation(libs.jade)
 }
 
 tasks.register<FabricModJsonV1Task>("generateModJson") {
@@ -176,6 +178,10 @@ tasks.register<FabricModJsonV1Task>("generateModJson") {
         entrypoint("client", "me.gurkz.superdupermod.client.SuperDuperClient", "kotlin")
         entrypoint("fabric-datagen", "me.gurkz.superdupermod.client.SuperDuperDataGenerator", "kotlin")
 
+        entrypoint("jade", "me.gurkz.superdupermod.jade.SuperDuperJadePluginCommon", "kotlin")
+        entrypoint("jade", "me.gurkz.superdupermod.client.jade.SuperDuperJadePluginClient", "kotlin")
+
+
         mixin("superdupermod.mixins.json")
 
         depends("fabricloader", ">=${libs.versions.fabric.loader.get()}")
@@ -185,6 +191,8 @@ tasks.register<FabricModJsonV1Task>("generateModJson") {
         depends("owo", ">=${libs.versions.owo.get()}")
 
         depends("minecraft", "~${libs.versions.minecraft.get()}")
+
+        suggests("jade", "*")
 
         libs.bundles.silk.get().forEach { dep ->
             depends(

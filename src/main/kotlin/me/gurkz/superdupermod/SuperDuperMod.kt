@@ -17,6 +17,7 @@ import me.gurkz.superdupermod.command.TpaCommands
 import me.gurkz.superdupermod.data.DataStorages
 import me.gurkz.superdupermod.event.DeathLocationEventListeners
 import me.gurkz.superdupermod.event.OfflineTpEventListeners
+import me.gurkz.superdupermod.event.PettingEventListeners
 import me.gurkz.superdupermod.item.ModItems
 import me.gurkz.superdupermod.network.RespawnPlayer
 import me.gurkz.superdupermod.video.VideoCommands
@@ -70,6 +71,8 @@ object SuperDuperMod : ModInitializer {
         }
 
         VideoCommands.register()
+
+        PettingEventListeners.register()
     }
 
     private fun registerSuperDuperModCommand() {
