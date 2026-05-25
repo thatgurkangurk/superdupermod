@@ -5,6 +5,7 @@
 ### Added
 
 ### Changed
+- [internal] use owo lib for networking
 
 ### Removed
 

@@ -8,27 +8,23 @@
 
 package me.gurkz.superdupermod.network
 
-import kotlinx.serialization.Serializable
-import me.gurkz.superdupermod.SuperDuperMod
+import me.gurkz.superdupermod.SuperDuperMod.NET_CHANNEL
 import me.gurkz.superdupermod.permission.KPermissions
 import net.minecraft.ChatFormatting
 import net.minecraft.commands.arguments.EntityArgument
 import net.silkmc.silk.commands.command
 import net.silkmc.silk.core.text.literalText
-import net.silkmc.silk.network.packet.s2cPacket
 
 object RespawnPlayer {
 
-    @Serializable
+    @JvmRecord
     data class RespawnPlayerPacket(
         val requester: String
     )
 
-    val respawnPlayerPacketS2C = s2cPacket<RespawnPlayerPacket>(
-        SuperDuperMod.id("respawn_player_packet_s2c"),
-    )
-
     fun initServer() {
+        NET_CHANNEL.registerClientboundDeferred(RespawnPlayerPacket::class.java)
+
         command("superdupermod") {
             literal("respawn") {
                 requires(KPermissions.require("superdupermod.command.respawn", 4))
@@ -39,7 +35,7 @@ object RespawnPlayer {
                         if (target.isAlive) {
                             val text = literalText("could not respawn ") {
                                 color = ChatFormatting.RED.color
-                                text(target.displayName!!)
+                                text(target.displayName)
                                 text(", they are alive")
                             }
 
@@ -49,10 +45,10 @@ object RespawnPlayer {
 
                         val requester = source.textName
 
-                        respawnPlayerPacketS2C.send(RespawnPlayerPacket(requester), target)
+                        NET_CHANNEL.serverHandle(target).send(RespawnPlayerPacket(requester))
 
                         val text = literalText("respawning ") {
-                            text(target.displayName!!)
+                            text(target.displayName)
                         }
 
                         source.sendSuccess({ text }, true)

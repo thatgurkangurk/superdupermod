@@ -8,6 +8,7 @@
 
 package me.gurkz.superdupermod
 
+import io.wispforest.owo.network.OwoNetChannel
 import me.gurkz.superdupermod.command.OfflineTpCommand
 import me.gurkz.superdupermod.command.ServerSayCommand
 import me.gurkz.superdupermod.command.SmiteCommand
@@ -39,6 +40,8 @@ object SuperDuperMod : ModInitializer {
         container ->
             container.metadata.version.friendlyString
     }.orElse("unknown version")
+
+    val NET_CHANNEL: OwoNetChannel = OwoNetChannel.create(id("super_duper_network"))
 
     override fun onInitialize() {
         logger.info("hi from super duper mod version $VERSION")

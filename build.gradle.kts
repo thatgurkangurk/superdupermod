@@ -36,6 +36,8 @@ repositories {
         name = "pauli.fyi"
         url = uri("https://repo.pauli.fyi/releases")
     }
+    maven("https://maven.wispforest.io/releases/") // owo lib
+    maven("https://jitpack.io")
 }
 
 license {
@@ -86,7 +88,8 @@ publishMods {
         requires(
             "fabric-language-kotlin",
             "fabric-api",
-            "silk"
+            "silk",
+            "owo-lib"
         )
     }
 
@@ -147,6 +150,9 @@ dependencies {
 
     implementation(libs.playerDataApi)
     include(libs.playerDataApi)
+
+    implementation(libs.owo)
+    include(libs.owo.sentinel)
 }
 
 tasks.register<FabricModJsonV1Task>("generateModJson") {
@@ -176,6 +182,7 @@ tasks.register<FabricModJsonV1Task>("generateModJson") {
         depends("fabric-api", ">=${libs.versions.fabric.api.get()}")
         depends("fabric-language-kotlin", ">=${libs.versions.fabric.kotlin.get()}")
         depends("fabric-permissions-api-v0", "*")
+        depends("owo", ">=${libs.versions.owo.get()}")
 
         depends("minecraft", "~${libs.versions.minecraft.get()}")
 

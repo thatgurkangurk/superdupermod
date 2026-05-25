@@ -20,6 +20,8 @@ playerDataApi = "0.10.0+26.1"
 
 silk = "1.11.6"
 
+owo = "0.13.0+26.1"
+
 [libraries]
 minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft" }
 fabric-api = { group = "net.fabricmc.fabric-api", name = "fabric-api", version.ref = "fabric-api" }
@@ -30,9 +32,11 @@ fabricPermissionsApi = { group = "me.lucko", name = "fabric-permissions-api", ve
 
 silk-commands = { group = "net.silkmc", name = "silk-commands", version.ref = "silk" }
 silk-core = { group = "net.silkmc", name = "silk-core", version.ref = "silk" }
-silk-network = { group = "net.silkmc", name = "silk-network", version.ref = "silk" }
 
 playerDataApi = { group = "eu.pb4", name = "player-data-api", version.ref = "playerDataApi" }
+
+owo = { group = "io.wispforest", name = "owo-lib", version.ref = "owo" }
+owo-sentinel = { group = "io.wispforest", name = "owo-sentinel", version.ref = "owo" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -45,4 +49,4 @@ modPublishPlugin = { id = "me.modmuss50.mod-publish-plugin", version.ref = "modP
 
 [bundles]
 fabric = ["fabric-loader", "fabric-api", "fabric-kotlin"]
-silk = ["silk-core", "silk-commands", "silk-network"]
+silk = ["silk-core", "silk-commands"]
