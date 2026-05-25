@@ -100,6 +100,12 @@ publishMods {
     }
 }
 
+sourceSets {
+    main {
+        java.srcDir("src/main/generatedJava")
+    }
+}
+
 loom {
     splitEnvironmentSourceSets()
 
@@ -152,6 +158,7 @@ dependencies {
     include(libs.playerDataApi)
 
     implementation(libs.owo)
+    annotationProcessor(libs.owo)
     include(libs.owo.sentinel)
 
     implementation(libs.jade)
@@ -219,8 +226,21 @@ kotlin {
         jvmTarget.set(JvmTarget.JVM_25)
         javaParameters = true
     }
+    sourceSets.main {
+        kotlin.srcDir("src/main/generatedJava")
+    }
+}
+
+tasks.named<JavaCompile>("compileJava") {
+    options.generatedSourceOutputDirectory.set(
+        file("${projectDir}/src/main/generatedJava/me/gurkz/superdupermod/config")
+    )
 }
 
 java {
     withSourcesJar()
+}
+
+tasks.named<Jar>("sourcesJar") {
+    dependsOn("compileJava", "compileKotlin")
 }

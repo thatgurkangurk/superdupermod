@@ -8,6 +8,7 @@
 
 package me.gurkz.superdupermod.event
 
+import me.gurkz.superdupermod.SuperDuperMod
 import me.gurkz.superdupermod.data.DataAttachments.NEXT_PET_TIME
 import net.fabricmc.fabric.api.event.player.UseEntityCallback
 import net.minecraft.core.particles.ParticleTypes
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.animal.feline.Cat
 import net.minecraft.world.entity.animal.feline.CatSoundVariants
 import net.minecraft.world.entity.animal.wolf.Wolf
 import net.minecraft.world.entity.animal.wolf.WolfSoundVariants
+import java.util.concurrent.TimeUnit
 
 object PettingEventListeners {
     private fun handlePetPetting(entity: TamableAnimal, level: ServerLevel): InteractionResult {
@@ -29,7 +31,7 @@ object PettingEventListeners {
         val nextPetTime = entity.getAttached(NEXT_PET_TIME) ?: 0L
 
         if (currentTime >= nextPetTime) {
-            entity.setAttached(NEXT_PET_TIME, currentTime + 30_000L)
+            entity.setAttached(NEXT_PET_TIME, currentTime + TimeUnit.SECONDS.toMillis(SuperDuperMod.CONFIG.petPettingCooldown()))
 
             level.sendParticles(
                 ParticleTypes.HEART,

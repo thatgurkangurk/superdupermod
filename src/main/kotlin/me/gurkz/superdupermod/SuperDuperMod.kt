@@ -14,6 +14,7 @@ import me.gurkz.superdupermod.command.ServerSayCommand
 import me.gurkz.superdupermod.command.SmiteCommand
 import me.gurkz.superdupermod.command.SuicideCommand
 import me.gurkz.superdupermod.command.TpaCommands
+import me.gurkz.superdupermod.config.SuperDuperConfig
 import me.gurkz.superdupermod.data.DataStorages
 import me.gurkz.superdupermod.event.DeathLocationEventListeners
 import me.gurkz.superdupermod.event.OfflineTpEventListeners
@@ -43,6 +44,8 @@ object SuperDuperMod : ModInitializer {
     }.orElse("unknown version")
 
     val NET_CHANNEL: OwoNetChannel = OwoNetChannel.create(id("super_duper_network"))
+
+    val CONFIG = SuperDuperConfig.createAndLoad()
 
     override fun onInitialize() {
         logger.info("hi from super duper mod version $VERSION")
