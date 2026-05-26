@@ -3,16 +3,24 @@
 ## [Unreleased]
 
 ### Added
-- you can now pet your pet (wolf/cat) by sneaking and right clicking on them
 
 ### Changed
-- [internal] use owo lib for networking
 
 ### Removed
 
 ### Fixed
 
-## [1.3.0] - 2026-04-01
+## [1.4.0] - 2026-05-26
+
+### Added
+
+- you can now pet your pet (wolf/cat) by sneaking and right clicking on them
+
+### Changed
+
+- [internal] use owo lib for networking
+
+## 1.3.0 - 2026-04-01
 
 ### Added
 
