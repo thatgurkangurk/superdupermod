@@ -46,6 +46,9 @@ license {
     include("**/*.java")
     include("**/*.kt")
     exclude("**/*.properties")
+
+    // annoying, will maybe fix later
+    exclude("**/generatedJava/**")
 }
 
 changelog {
@@ -232,11 +235,13 @@ kotlin {
 }
 
 tasks.named<JavaCompile>("compileJava") {
-    options.generatedSourceOutputDirectory.set(
-        file("${projectDir}/src/main/generatedJava/me/gurkz/superdupermod/config")
-    )
-}
+    val generatedDir = file("${projectDir}/src/main/generatedJava")
+    options.generatedSourceOutputDirectory.set(generatedDir)
 
+    doFirst {
+        generatedDir.mkdirs()
+    }
+}
 java {
     withSourcesJar()
 }
