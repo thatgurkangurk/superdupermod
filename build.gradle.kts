@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.fabric.loom)
+    kotlin("kapt") version libs.versions.kotlin
     alias(libs.plugins.yumiGradleLicenser)
     alias(libs.plugins.jetbrains.changelog)
     alias(libs.plugins.modPublishPlugin)
@@ -46,9 +47,6 @@ license {
     include("**/*.java")
     include("**/*.kt")
     exclude("**/*.properties")
-
-    // annoying, will maybe fix later
-    exclude("**/generatedJava/**")
 }
 
 changelog {
@@ -103,12 +101,6 @@ publishMods {
     }
 }
 
-sourceSets {
-    main {
-        java.srcDir("src/main/generatedJava")
-    }
-}
-
 loom {
     splitEnvironmentSourceSets()
 
@@ -122,7 +114,6 @@ loom {
     runs {
         named("server") {
             server()
-
             runDir("run/server")
         }
     }
@@ -140,6 +131,16 @@ fabricApi {
     configureDataGeneration {
         client = true
     }
+}
+
+configurations.configureEach {
+    if (name.startsWith("kapt")) {
+        exclude(group = "net.fabricmc", module = "sponge-mixin")
+    }
+}
+
+kapt {
+    includeCompileClasspath = false
 }
 
 dependencies {
@@ -160,8 +161,9 @@ dependencies {
     implementation(libs.playerDataApi)
     include(libs.playerDataApi)
 
+    // 3. Switch owo-lib to KAPT
     implementation(libs.owo)
-    annotationProcessor(libs.owo)
+    kapt(libs.owo)
     include(libs.owo.sentinel)
 
     implementation(libs.jade)
@@ -183,14 +185,12 @@ tasks.register<FabricModJsonV1Task>("generateModJson") {
         icon("./assets/icon.png")
         environment = "*"
 
-
         entrypoint("main", "me.gurkz.superdupermod.SuperDuperMod", "kotlin")
         entrypoint("client", "me.gurkz.superdupermod.client.SuperDuperClient", "kotlin")
         entrypoint("fabric-datagen", "me.gurkz.superdupermod.client.SuperDuperDataGenerator", "kotlin")
 
         entrypoint("jade", "me.gurkz.superdupermod.jade.SuperDuperJadePluginCommon", "kotlin")
         entrypoint("jade", "me.gurkz.superdupermod.client.jade.SuperDuperJadePluginClient", "kotlin")
-
 
         mixin("superdupermod.mixins.json")
 
@@ -229,19 +229,8 @@ kotlin {
         jvmTarget.set(JvmTarget.JVM_25)
         javaParameters = true
     }
-    sourceSets.main {
-        kotlin.srcDir("src/main/generatedJava")
-    }
 }
 
-tasks.named<JavaCompile>("compileJava") {
-    val generatedDir = file("${projectDir}/src/main/generatedJava")
-    options.generatedSourceOutputDirectory.set(generatedDir)
-
-    doFirst {
-        generatedDir.mkdirs()
-    }
-}
 java {
     withSourcesJar()
 }

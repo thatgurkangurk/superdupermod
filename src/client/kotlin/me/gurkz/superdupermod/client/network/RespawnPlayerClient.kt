@@ -9,11 +9,11 @@
 package me.gurkz.superdupermod.client.network
 
 import me.gurkz.superdupermod.SuperDuperMod
-import me.gurkz.superdupermod.network.RespawnPlayer
+import me.gurkz.superdupermod.packet.RespawnPlayerPacket
 
 object RespawnPlayerClient {
     fun initClient() {
-        SuperDuperMod.NET_CHANNEL.registerClientbound(RespawnPlayer.RespawnPlayerPacket::class.java) { _, access ->
+        SuperDuperMod.NET_CHANNEL.registerClientbound(RespawnPlayerPacket::class.java) { _, access ->
             val player = access.player()
 
             if (player.isDeadOrDying) {

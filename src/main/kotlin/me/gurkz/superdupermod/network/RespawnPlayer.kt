@@ -9,6 +9,7 @@
 package me.gurkz.superdupermod.network
 
 import me.gurkz.superdupermod.SuperDuperMod.NET_CHANNEL
+import me.gurkz.superdupermod.packet.RespawnPlayerPacket
 import me.gurkz.superdupermod.permission.KPermissions
 import net.minecraft.ChatFormatting
 import net.minecraft.commands.arguments.EntityArgument
@@ -16,12 +17,6 @@ import net.silkmc.silk.commands.command
 import net.silkmc.silk.core.text.literalText
 
 object RespawnPlayer {
-
-    @JvmRecord
-    data class RespawnPlayerPacket(
-        val requester: String
-    )
-
     fun initServer() {
         NET_CHANNEL.registerClientboundDeferred(RespawnPlayerPacket::class.java)
 
