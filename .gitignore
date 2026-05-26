@@ -119,3 +119,6 @@ run/
 !gradle-wrapper.jar
 
 .kotlin
+
+# generated sources
+/src/*/generated/
