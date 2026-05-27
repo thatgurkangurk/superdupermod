@@ -8,7 +8,7 @@
 
 package me.gurkz.superdupermod.event
 
-import me.gurkz.superdupermod.SuperDuperMod
+import me.gurkz.superdupermod.config.SuperDuperConfig
 import me.gurkz.superdupermod.data.DataAttachments.NEXT_PET_TIME
 import net.fabricmc.fabric.api.event.player.UseEntityCallback
 import net.minecraft.core.particles.ParticleTypes
@@ -31,7 +31,7 @@ object PettingEventListeners {
         val nextPetTime = entity.getAttached(NEXT_PET_TIME) ?: 0L
 
         if (currentTime >= nextPetTime) {
-            entity.setAttached(NEXT_PET_TIME, currentTime + TimeUnit.SECONDS.toMillis(SuperDuperMod.CONFIG.petPettingCooldown()))
+            entity.setAttached(NEXT_PET_TIME, currentTime + TimeUnit.SECONDS.toMillis(SuperDuperConfig.SERVER.petPettingCooldown.get()))
 
             level.sendParticles(
                 ParticleTypes.HEART,

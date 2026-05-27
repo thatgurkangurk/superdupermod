@@ -8,6 +8,8 @@ fabric-loader = "0.19.2"
 fabric-api = "0.149.1+26.1.2"
 fabric-kotlin = "1.13.11+kotlin.2.3.21"
 
+forgeConfigApi = "26.1.4"
+
 yumiGradleLicenser = "2.1.1"
 
 jetbrains-changelog = "2.4.+"
@@ -31,6 +33,9 @@ fabric-loader = { group = "net.fabricmc", name = "fabric-loader", version.ref = 
 fabric-kotlin = { group = "net.fabricmc", name = "fabric-language-kotlin", version.ref = "fabric-kotlin" }
 
 fabricPermissionsApi = { group = "me.lucko", name = "fabric-permissions-api", version.ref = "fabricPermissionsApi" }
+
+forgeConfigApi = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-fabric", version.ref = "forgeConfigApi" }
+
 
 silk-commands = { group = "net.silkmc", name = "silk-commands", version.ref = "silk" }
 silk-core = { group = "net.silkmc", name = "silk-core", version.ref = "silk" }

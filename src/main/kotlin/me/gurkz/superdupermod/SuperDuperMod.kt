@@ -8,6 +8,7 @@
 
 package me.gurkz.superdupermod
 
+import fuzs.forgeconfigapiport.fabric.api.v5.ConfigRegistry
 import io.wispforest.owo.network.OwoNetChannel
 import me.gurkz.superdupermod.command.OfflineTpCommand
 import me.gurkz.superdupermod.command.ServerSayCommand
@@ -31,6 +32,7 @@ import net.fabricmc.fabric.api.resource.v1.ResourceLoader
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.resources.Identifier
 import net.minecraft.server.packs.PackType
+import net.neoforged.fml.config.ModConfig
 import net.silkmc.silk.commands.command
 import net.silkmc.silk.core.logging.logger
 import net.silkmc.silk.core.text.literalText
@@ -46,9 +48,9 @@ object SuperDuperMod : ModInitializer {
 
     val NET_CHANNEL: OwoNetChannel = OwoNetChannel.create(id("super_duper_network"))
 
-    val CONFIG = SuperDuperConfig.createAndLoad()
-
     override fun onInitialize() {
+        ConfigRegistry.INSTANCE.register("superdupermod", ModConfig.Type.SERVER, SuperDuperConfig.serverSpec)
+
         logger.info("hi from super duper mod version $VERSION")
         registerSuperDuperModCommand()
 

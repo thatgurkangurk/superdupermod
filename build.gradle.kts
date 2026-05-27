@@ -39,6 +39,7 @@ repositories {
     }
     maven("https://maven.wispforest.io/releases/") // owo lib
     maven("https://jitpack.io")
+    maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven") { name = "fuzs mod resources" }
 }
 
 license {
@@ -163,10 +164,12 @@ dependencies {
 
     // 3. Switch owo-lib to KAPT
     implementation(libs.owo)
-    kapt(libs.owo)
     include(libs.owo.sentinel)
 
     implementation(libs.jade)
+
+    api(libs.forgeConfigApi)
+    localRuntime(libs.forgeConfigApi)
 }
 
 tasks.register<FabricModJsonV1Task>("generateModJson") {
