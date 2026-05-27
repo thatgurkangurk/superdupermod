@@ -6,6 +6,7 @@
 
 ### Changed
 - fireworks from ``/suicide`` no longer deal damage to entities
+- update to 26.1.2
 
 ### Removed
 
