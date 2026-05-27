@@ -5,15 +5,23 @@
 ### Added
 
 ### Changed
-- fireworks from ``/suicide`` no longer deal damage to entities
-- update to 26.1.2
 
 ### Removed
 
 ### Fixed
+
+## [1.5.0] - 2026-05-27
+
+### Changed
+
+- fireworks from ``/suicide`` no longer deal damage to entities
+- update to 26.1.2
+
+### Fixed
+
 - data attachments sometimes not loading
 
-## [1.4.0] - 2026-05-26
+## 1.4.0 - 2026-05-26
 
 ### Added
 
