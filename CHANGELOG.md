@@ -10,6 +10,7 @@
 ### Removed
 
 ### Fixed
+- data attachments sometimes not loading
 
 ## [1.4.0] - 2026-05-26
 

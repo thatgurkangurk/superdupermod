@@ -15,6 +15,7 @@ import me.gurkz.superdupermod.command.SmiteCommand
 import me.gurkz.superdupermod.command.SuicideCommand
 import me.gurkz.superdupermod.command.TpaCommands
 import me.gurkz.superdupermod.config.SuperDuperConfig
+import me.gurkz.superdupermod.data.DataAttachments
 import me.gurkz.superdupermod.data.DataStorages
 import me.gurkz.superdupermod.event.DeathLocationEventListeners
 import me.gurkz.superdupermod.event.OfflineTpEventListeners
@@ -50,6 +51,8 @@ object SuperDuperMod : ModInitializer {
     override fun onInitialize() {
         logger.info("hi from super duper mod version $VERSION")
         registerSuperDuperModCommand()
+
+        DataAttachments.initialise()
 
         SmiteCommand.register()
         ServerSayCommand.register()

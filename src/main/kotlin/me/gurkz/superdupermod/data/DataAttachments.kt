@@ -19,4 +19,6 @@ object DataAttachments {
     val NEXT_PET_TIME: AttachmentType<Long> = AttachmentRegistry.create(SuperDuperMod.id("next_pet_time")) { builder ->
         builder.initializer { 0L }.persistent(Codec.LONG).syncWith(ByteBufCodecs.LONG, AttachmentSyncPredicate.all())
     }
+
+    fun initialise() {}
 }
