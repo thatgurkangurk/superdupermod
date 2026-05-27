@@ -5,6 +5,7 @@
 ### Added
 
 ### Changed
+- fireworks from ``/suicide`` no longer deal damage to entities
 
 ### Removed
 

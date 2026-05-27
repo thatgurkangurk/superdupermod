@@ -24,7 +24,7 @@ object FireworkUtil {
         return (red shl 16) or (green shl 8) or blue
     }
 
-    fun summonFirework(pos: Vec3, level: ServerLevel, colour: Int, fadeColour: Int, flightDuration: Int) {
+    fun summonFirework(pos: Vec3, level: ServerLevel, colour: Int, fadeColour: Int, flightDuration: Int, damageEntities: Boolean = true) {
         val explosion = FireworkExplosion(
             FireworkExplosion.Shape.LARGE_BALL,
             IntArrayList(intArrayOf(colour)),
@@ -48,6 +48,10 @@ object FireworkUtil {
             pos.z,
             stack
         )
+
+        if (!damageEntities) {
+            rocket.addTag("superdupermod:no_damage")
+        }
 
         level.addFreshEntity(rocket)
     }

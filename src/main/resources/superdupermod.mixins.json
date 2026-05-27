@@ -8,7 +8,8 @@
     "GlassDropMixin",
     "LeashableVillagerMixin",
     "PlayerDeathMixin",
-    "ServerAccessorMixin"
+    "ServerAccessorMixin",
+    "FireworkNoDamageMixin"
   ],
   "injectors": {
     "defaultRequire": 1

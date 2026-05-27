@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "minecraft:amethyst_shard",
+    "W": "#minecraft:wool"
+  },
+  "pattern": [
+    "W  ",
+    " A ",
+    "  A"
+  ],
+  "result": {
+    "id": "superdupermod:silencer_stick"
+  }
+}

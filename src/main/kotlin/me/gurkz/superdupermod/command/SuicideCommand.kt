@@ -54,7 +54,8 @@ object SuicideCommand {
                     source.level,
                     FireworkUtil.createColour(0, 255, 0),
                     FireworkUtil.createColour(255, 0, 0),
-                    2
+                    2,
+                    false
                 )
 
                 player.hurtServer(source.level, damageSource, 20.0f)
