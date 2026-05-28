@@ -92,7 +92,7 @@ publishMods {
             "fabric-api",
             "silk",
             "owo-lib",
-            "fabric-config-api-port"
+            "forge-config-api-port"
         )
     }
 
