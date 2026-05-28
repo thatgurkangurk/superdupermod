@@ -91,7 +91,8 @@ publishMods {
             "fabric-language-kotlin",
             "fabric-api",
             "silk",
-            "owo-lib"
+            "owo-lib",
+            "fabric-config-api-port"
         )
     }
 
@@ -198,9 +199,10 @@ tasks.register<FabricModJsonV1Task>("generateModJson") {
         mixin("superdupermod.mixins.json")
 
         depends("fabricloader", ">=${libs.versions.fabric.loader.get()}")
-        depends("fabric-api", "~${libs.versions.fabric.api.get()}")
+        depends("fabric-api", ">=${libs.versions.fabric.api.get()}")
         depends("fabric-language-kotlin", ">=${libs.versions.fabric.kotlin.get()}")
         depends("fabric-permissions-api-v0", "*")
+        depends("forgeconfigapiport", "*")
         depends("owo", ">=${libs.versions.owo.get()}")
 
         depends("minecraft", "~${libs.versions.minecraft.get()}")

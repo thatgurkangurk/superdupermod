@@ -10,7 +10,17 @@
 
 ### Fixed
 
-## [1.5.0] - 2026-05-27
+## [1.6.0] - 2026-05-28
+
+### Changed
+
+- forge config api port for the config
+
+### Fixed
+
+- fixed fabric api dependency
+
+## 1.5.0 - 2026-05-27
 
 ### Changed
 
