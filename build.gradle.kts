@@ -89,7 +89,6 @@ publishMods {
             "fabric-language-kotlin",
             "fabric-api",
             "silk",
-            "owo-lib",
             "forge-config-api-port"
         )
     }
