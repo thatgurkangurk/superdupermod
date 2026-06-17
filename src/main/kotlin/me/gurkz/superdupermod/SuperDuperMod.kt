@@ -9,7 +9,6 @@
 package me.gurkz.superdupermod
 
 import fuzs.forgeconfigapiport.fabric.api.v5.ConfigRegistry
-import io.wispforest.owo.network.OwoNetChannel
 import me.gurkz.superdupermod.command.OfflineTpCommand
 import me.gurkz.superdupermod.command.ServerSayCommand
 import me.gurkz.superdupermod.command.SmiteCommand
@@ -44,9 +43,7 @@ object SuperDuperMod : ModInitializer {
     val VERSION: String = loader.getModContainer(MOD_ID).map {
         container ->
             container.metadata.version.friendlyString
-    }.orElse("unknown version")
-
-    val NET_CHANNEL: OwoNetChannel = OwoNetChannel.create(id("super_duper_network"))
+    }.orElse(null) ?: "unknown version"
 
     override fun onInitialize() {
         ConfigRegistry.INSTANCE.register("superdupermod", ModConfig.Type.SERVER, SuperDuperConfig.serverSpec)

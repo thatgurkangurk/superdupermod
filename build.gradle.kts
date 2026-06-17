@@ -9,7 +9,6 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.fabric.loom)
-    kotlin("kapt") version libs.versions.kotlin
     alias(libs.plugins.yumiGradleLicenser)
     alias(libs.plugins.jetbrains.changelog)
     alias(libs.plugins.modPublishPlugin)
@@ -37,7 +36,6 @@ repositories {
         name = "pauli.fyi"
         url = uri("https://repo.pauli.fyi/releases")
     }
-    maven("https://maven.wispforest.io/releases/") // owo lib
     maven("https://jitpack.io")
     maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven") { name = "fuzs mod resources" }
 }
@@ -135,16 +133,6 @@ fabricApi {
     }
 }
 
-configurations.configureEach {
-    if (name.startsWith("kapt")) {
-        exclude(group = "net.fabricmc", module = "sponge-mixin")
-    }
-}
-
-kapt {
-    includeCompileClasspath = false
-}
-
 dependencies {
     minecraft(libs.minecraft)
 
@@ -162,10 +150,6 @@ dependencies {
 
     implementation(libs.playerDataApi)
     include(libs.playerDataApi)
-
-    // 3. Switch owo-lib to KAPT
-    implementation(libs.owo)
-    include(libs.owo.sentinel)
 
     implementation(libs.jade)
 
@@ -203,7 +187,6 @@ tasks.register<FabricModJsonV1Task>("generateModJson") {
         depends("fabric-language-kotlin", ">=${libs.versions.fabric.kotlin.get()}")
         depends("fabric-permissions-api-v0", "*")
         depends("forgeconfigapiport", "*")
-        depends("owo", ">=${libs.versions.owo.get()}")
 
         depends("minecraft", "~${libs.versions.minecraft.get()}")
 

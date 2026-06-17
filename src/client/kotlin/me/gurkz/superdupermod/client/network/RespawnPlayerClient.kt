@@ -8,15 +8,14 @@
 
 package me.gurkz.superdupermod.client.network
 
-import me.gurkz.superdupermod.SuperDuperMod
-import me.gurkz.superdupermod.packet.RespawnPlayerPacket
+import me.gurkz.superdupermod.network.packet.RespawnPlayerPacket
 
 object RespawnPlayerClient {
     fun initClient() {
-        SuperDuperMod.NET_CHANNEL.registerClientbound(RespawnPlayerPacket::class.java) { _, access ->
-            val player = access.player()
+        RespawnPlayerPacket.S2C.receiveOnClient { _, context ->
+            val player = context.client.player
 
-            if (player.isDeadOrDying) {
+            if (player?.isDeadOrDying == true) {
                 player.respawn()
             }
         }

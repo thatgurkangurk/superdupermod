@@ -8,8 +8,7 @@
 
 package me.gurkz.superdupermod.network
 
-import me.gurkz.superdupermod.SuperDuperMod.NET_CHANNEL
-import me.gurkz.superdupermod.packet.RespawnPlayerPacket
+import me.gurkz.superdupermod.network.packet.RespawnPlayerPacket
 import me.gurkz.superdupermod.permission.KPermissions
 import net.minecraft.ChatFormatting
 import net.minecraft.commands.arguments.EntityArgument
@@ -18,8 +17,6 @@ import net.silkmc.silk.core.text.literalText
 
 object RespawnPlayer {
     fun initServer() {
-        NET_CHANNEL.registerClientboundDeferred(RespawnPlayerPacket::class.java)
-
         command("superdupermod") {
             literal("respawn") {
                 requires(KPermissions.require("superdupermod.command.respawn", 4))
@@ -40,7 +37,7 @@ object RespawnPlayer {
 
                         val requester = source.textName
 
-                        NET_CHANNEL.serverHandle(target).send(RespawnPlayerPacket(requester))
+                        RespawnPlayerPacket.S2C.send(RespawnPlayerPacket(requester), target)
 
                         val text = literalText("respawning ") {
                             text(target.displayName)

@@ -39,6 +39,7 @@ forgeConfigApi = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport
 
 silk-commands = { group = "net.silkmc", name = "silk-commands", version.ref = "silk" }
 silk-core = { group = "net.silkmc", name = "silk-core", version.ref = "silk" }
+silk-network = { group = "net.silkmc", name = "silk-network", version.ref = "silk" }
 
 playerDataApi = { group = "eu.pb4", name = "player-data-api", version.ref = "playerDataApi" }
 
@@ -57,4 +58,4 @@ modPublishPlugin = { id = "me.modmuss50.mod-publish-plugin", version.ref = "modP
 
 [bundles]
 fabric = ["fabric-loader", "fabric-api", "fabric-kotlin"]
-silk = ["silk-core", "silk-commands"]
+silk = ["silk-core", "silk-commands", "silk-network"]
