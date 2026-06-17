@@ -22,8 +22,6 @@ playerDataApi = "0.10.0+26.1"
 
 silk = "1.11.6"
 
-owo = "0.13.0+26.1"
-
 jade = "26.1.0+fabric"
 
 [libraries]
@@ -43,8 +41,6 @@ silk-network = { group = "net.silkmc", name = "silk-network", version.ref = "sil
 
 playerDataApi = { group = "eu.pb4", name = "player-data-api", version.ref = "playerDataApi" }
 
-owo = { group = "io.wispforest", name = "owo-lib", version.ref = "owo" }
-owo-sentinel = { group = "io.wispforest", name = "owo-sentinel", version.ref = "owo" }
 jade = { group = "maven.modrinth", name = "jade", version.ref = "jade" }
 
 [plugins]
