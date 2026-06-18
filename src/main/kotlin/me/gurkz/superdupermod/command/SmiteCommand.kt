@@ -16,11 +16,12 @@ import net.silkmc.silk.commands.command
 import net.silkmc.silk.core.entity.pos
 import net.silkmc.silk.core.entity.serverWorld
 import net.minecraft.commands.arguments.EntityArgument
+import net.minecraft.world.entity.EntityTypes
 
 object SmiteCommand {
     private fun smite(player: ServerPlayer) {
         val world = player.serverWorld
-        val lightningBolt = LightningBolt(EntityType.LIGHTNING_BOLT, world)
+        val lightningBolt = LightningBolt(EntityTypes.LIGHTNING_BOLT, world)
 
         lightningBolt.setPos(player.pos)
 

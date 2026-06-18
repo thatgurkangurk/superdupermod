@@ -9,6 +9,7 @@
 package me.gurkz.superdupermod
 
 import fuzs.forgeconfigapiport.fabric.api.v5.ConfigRegistry
+import me.gurkz.superdupermod.SuperDuperMod.logger
 import me.gurkz.superdupermod.command.OfflineTpCommand
 import me.gurkz.superdupermod.command.ServerSayCommand
 import me.gurkz.superdupermod.command.SmiteCommand

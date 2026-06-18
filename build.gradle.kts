@@ -113,15 +113,12 @@ loom {
     runs {
         named("server") {
             server()
-            runDir("run/server")
+            runDirectory.set(file("run/server"))
         }
-    }
 
-    runs {
         named("client") {
             client()
-            ideConfigGenerated(true)
-            programArg("--username=Dev")
+            programArguments.add("--username=Dev")
         }
     }
 }
@@ -142,10 +139,13 @@ dependencies {
     include(libs.fabricPermissionsApi)
 
     // silk
-    implementation(libs.bundles.silk)
+    //implementation(libs.bundles.silk)
+    // switch back to libs.bundles.silk when silk actually releases for 26.2
+    // get (build) from https://github.com/thatgurkangurk/silk
+    implementation(fileTree("libs") { include("silk-*.jar") })
 
     // mod menu
-    runtimeOnly("com.terraformersmc:modmenu:18.0.0-alpha.8")
+    localRuntime("com.terraformersmc:modmenu:20.0.0-beta.2")
 
     implementation(libs.playerDataApi)
     include(libs.playerDataApi)

@@ -26,7 +26,7 @@ object RespawnPlayer {
 
                         if (target.isAlive) {
                             val text = literalText("could not respawn ") {
-                                color = ChatFormatting.RED.color
+                                color = ChatFormatting.RED.ordinal
                                 text(target.displayName)
                                 text(", they are alive")
                             }

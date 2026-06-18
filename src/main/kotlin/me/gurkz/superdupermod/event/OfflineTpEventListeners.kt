@@ -21,12 +21,6 @@ object OfflineTpEventListeners {
     fun register() {
         ServerPlayerEvents.LEAVE.register { player ->
             val level = player.serverWorld
-            val server = level.server
-
-            if (server == null) {
-                logger().warn("no server")
-                return@register
-            }
 
             logger().debug("saving data from offline tp")
 
