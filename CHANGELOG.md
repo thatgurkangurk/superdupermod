@@ -5,13 +5,18 @@
 ### Added
 
 ### Changed
-- update to 26.2
 
 ### Removed
 
 ### Fixed
 
-## [1.6.0] - 2026-05-28
+## [1.7.0] - 2026-06-22
+
+### Changed
+
+- update to 26.2
+
+## 1.6.0 - 2026-05-28
 
 ### Changed
 
