@@ -5,6 +5,7 @@
 ### Added
 
 ### Changed
+- update to 26.2
 
 ### Removed
 

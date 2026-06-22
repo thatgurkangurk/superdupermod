@@ -33,7 +33,7 @@ object DeathLocationEventListeners {
 
                 if (data == null) {
                     source.sendFailure(literalText("could not find a death location") {
-                        color = ChatFormatting.RED.color
+                        color = ChatFormatting.RED.ordinal
                     })
                     return@runs
                 }

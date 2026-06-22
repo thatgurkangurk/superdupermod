@@ -113,15 +113,12 @@ loom {
     runs {
         named("server") {
             server()
-            runDir("run/server")
+            runDirectory.set(file("run/server"))
         }
-    }
 
-    runs {
         named("client") {
             client()
-            ideConfigGenerated(true)
-            programArg("--username=Dev")
+            programArguments.add("--username=Dev")
         }
     }
 }
@@ -145,7 +142,7 @@ dependencies {
     implementation(libs.bundles.silk)
 
     // mod menu
-    runtimeOnly("com.terraformersmc:modmenu:18.0.0-alpha.8")
+    localRuntime("com.terraformersmc:modmenu:20.0.0-beta.2")
 
     implementation(libs.playerDataApi)
     include(libs.playerDataApi)

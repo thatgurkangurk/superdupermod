@@ -1,14 +1,14 @@
 [versions]
-kotlin = "2.3.10"
+kotlin = "2.4.0"
 
-minecraft = "26.1.2"
+minecraft = "26.2"
 
-fabric-loom = "1.16.+"
-fabric-loader = "0.19.2"
-fabric-api = "0.149.1+26.1.2"
-fabric-kotlin = "1.13.11+kotlin.2.3.21"
+fabric-loom = "1.17.+"
+fabric-loader = "0.19.3"
+fabric-api = "0.152.1+26.2"
+fabric-kotlin = "1.13.12+kotlin.2.4.0"
 
-forgeConfigApi = "26.1.4"
+forgeConfigApi = "26.2.0"
 
 yumiGradleLicenser = "2.1.1"
 
@@ -18,11 +18,11 @@ fabricPermissionsApi = "0.7.0"
 
 modPublishPlugin = "1.1.0"
 
-playerDataApi = "0.10.0+26.1"
+playerDataApi = "0.11.0+26.2"
 
-silk = "1.11.6"
+silk = "1.12.0"
 
-jade = "26.1.0+fabric"
+jade = "26.2.1+fabric"
 
 [libraries]
 minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft" }

@@ -76,14 +76,14 @@ object TpaCommands {
         if (requester == null) return 0
 
         if (requester.uuid == target.uuid) {
-            requester.sendColorMsg("you can not tpa to yourself", ChatFormatting.RED.color)
+            requester.sendColorMsg("you can not tpa to yourself", ChatFormatting.RED.ordinal)
             return 0
         }
 
         val existingEntry = pendingRequests.entries.find { it.value.requesterUuid == requester.uuid }
         if (existingEntry != null) {
             if (!existingEntry.value.isExpired) {
-                requester.sendColorMsg("you already have a pending tpa request. use /tpacancel first.", ChatFormatting.RED.color)
+                requester.sendColorMsg("you already have a pending tpa request. use /tpacancel first.", ChatFormatting.RED.ordinal)
                 return 0
             }
             pendingRequests.remove(existingEntry.key)
@@ -92,12 +92,12 @@ object TpaCommands {
         pendingRequests[target.uuid] = TpaRequest(requester.uuid, TimeSource.Monotonic.markNow(), type)
 
         val isTpa = type == TpaType.TPA
-        requester.sendColorMsg("${if (isTpa) "tpa" else "tpa here"} request sent to ${target.gameProfile.name}. they have ${TIMEOUT.inWholeSeconds} seconds to accept", ChatFormatting.AQUA.color)
+        requester.sendColorMsg("${if (isTpa) "tpa" else "tpa here"} request sent to ${target.gameProfile.name}. they have ${TIMEOUT.inWholeSeconds} seconds to accept", ChatFormatting.AQUA.ordinal)
 
         val messageToTarget = literalText {
             text(requester.displayName!!)
             text(" has requested ")
-            color = ChatFormatting.AQUA.color
+            color = ChatFormatting.AQUA.ordinal
             if (isTpa) {
                 text("to teleport to you")
             } else {
@@ -132,13 +132,13 @@ object TpaCommands {
         val request = pendingRequests.remove(target.uuid)
 
         if (request == null || request.isExpired) {
-            target.sendColorMsg(if (request == null) "you don't have any pending teleport requests" else "that teleport request has timed out", ChatFormatting.RED.color)
+            target.sendColorMsg(if (request == null) "you don't have any pending teleport requests" else "that teleport request has timed out", ChatFormatting.RED.ordinal)
             return 0
         }
 
         val requester = target.serverList?.getPlayer(request.requesterUuid)
         if (requester == null) {
-            target.sendColorMsg("the player who requested the teleport is no longer online", ChatFormatting.RED.color)
+            target.sendColorMsg("the player who requested the teleport is no longer online", ChatFormatting.RED.ordinal)
             return 0
         }
 
@@ -156,10 +156,10 @@ object TpaCommands {
             true
         )
 
-        target.sendColorMsg("you accepted ${requester.displayName?.string}'s teleport ${if (isTpa) "request" else "here request"}", ChatFormatting.GREEN.color)
-        requester.sendColorMsg("${requester.displayName?.string} accepted your request${if (isTpa) "!" else " and teleported to you!"}", ChatFormatting.GREEN.color)
+        target.sendColorMsg("you accepted ${requester.displayName?.string}'s teleport ${if (isTpa) "request" else "here request"}", ChatFormatting.GREEN.ordinal)
+        requester.sendColorMsg("${requester.displayName?.string} accepted your request${if (isTpa) "!" else " and teleported to you!"}", ChatFormatting.GREEN.ordinal)
 
-        teleporter.connection.send(ClientboundSetTitleTextPacket(literalText("Teleported!") { color = ChatFormatting.GREEN.color }))
+        teleporter.connection.send(ClientboundSetTitleTextPacket(literalText("Teleported!") { color = ChatFormatting.GREEN.ordinal }))
 
         return 1
     }
@@ -169,12 +169,12 @@ object TpaCommands {
         val request = pendingRequests.remove(target.uuid)
 
         if (request == null || request.isExpired) {
-            target.sendColorMsg("you don't have any valid pending teleport requests", ChatFormatting.RED.color)
+            target.sendColorMsg("you don't have any valid pending teleport requests", ChatFormatting.RED.ordinal)
             return 0
         }
 
-        target.serverList?.getPlayer(request.requesterUuid)?.sendColorMsg("${target.displayName?.string} denied your teleport request", ChatFormatting.RED.color)
-        target.sendColorMsg("teleport request denied", ChatFormatting.RED.color)
+        target.serverList?.getPlayer(request.requesterUuid)?.sendColorMsg("${target.displayName?.string} denied your teleport request", ChatFormatting.RED.ordinal)
+        target.sendColorMsg("teleport request denied", ChatFormatting.RED.ordinal)
 
         return 1
     }
@@ -186,12 +186,12 @@ object TpaCommands {
         if (entry != null) pendingRequests.remove(entry.key)
 
         if (entry == null || entry.value.isExpired) {
-            requester.sendColorMsg("you don't have any active teleport requests to cancel", ChatFormatting.RED.color)
+            requester.sendColorMsg("you don't have any active teleport requests to cancel", ChatFormatting.RED.ordinal)
             return 0
         }
 
-        requester.sendColorMsg("you cancelled your teleport request", ChatFormatting.AQUA.color)
-        requester.serverList?.getPlayer(entry.key)?.sendColorMsg("${requester.displayName?.string} cancelled their teleport request", ChatFormatting.AQUA.color)
+        requester.sendColorMsg("you cancelled your teleport request", ChatFormatting.AQUA.ordinal)
+        requester.serverList?.getPlayer(entry.key)?.sendColorMsg("${requester.displayName?.string} cancelled their teleport request", ChatFormatting.AQUA.ordinal)
 
         return 1
     }
