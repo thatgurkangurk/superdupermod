@@ -139,10 +139,7 @@ dependencies {
     include(libs.fabricPermissionsApi)
 
     // silk
-    //implementation(libs.bundles.silk)
-    // switch back to libs.bundles.silk when silk actually releases for 26.2
-    // get (build) from https://github.com/thatgurkangurk/silk
-    implementation(fileTree("libs") { include("silk-*.jar") })
+    implementation(libs.bundles.silk)
 
     // mod menu
     localRuntime("com.terraformersmc:modmenu:20.0.0-beta.2")

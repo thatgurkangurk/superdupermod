@@ -20,7 +20,7 @@ modPublishPlugin = "1.1.0"
 
 playerDataApi = "0.11.0+26.2"
 
-silk = "1.11.6"
+silk = "1.12.0"
 
 jade = "26.2.1+fabric"
 
