@@ -31,13 +31,13 @@ class SuperDuperRecipeProvider(
     }
 
     override fun createRecipeProvider(
-        p0: HolderLookup.Provider,
-        p1: BootstrapContext<Recipe<*>>,
-        p2: BootstrapContext<Advancement>
+        registries: HolderLookup.Provider,
+        recipes: BootstrapContext<Recipe<*>>,
+        advancements: BootstrapContext<Advancement>
     ): RecipeProvider {
-        return object : RecipeProvider(p1, p2) {
+        return object : RecipeProvider(recipes, advancements) {
             override fun buildRecipes() {
-                shaped(RecipeCategory.TOOLS, ModItems.SILENCER_STICK, 1)
+                this.shaped(RecipeCategory.TOOLS, ModItems.SILENCER_STICK, 1)
                     .pattern("W  ")
                     .pattern(" A ")
                     .pattern("  A")

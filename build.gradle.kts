@@ -142,7 +142,7 @@ dependencies {
     implementation(libs.bundles.silk)
 
     // mod menu
-    localRuntime("com.terraformersmc:modmenu:20.0.0-beta.2")
+    localRuntime("com.terraformersmc:modmenu:21.0.0")
 
     implementation(libs.playerDataApi)
     include(libs.playerDataApi)

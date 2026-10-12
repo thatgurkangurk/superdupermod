@@ -1,0 +1,4 @@
+# no crlf in this repository
+* text=auto eol=lf
+
+*.png binary
