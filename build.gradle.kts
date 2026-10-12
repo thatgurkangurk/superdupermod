@@ -188,10 +188,12 @@ tasks.register<FabricModJsonV1Task>("generateModJson") {
 
         suggests("jade", "*")
 
-        depends(
-            "silk-all",
-            ">=${libs.versions.silk.get()}"
-        )
+        libs.bundles.silk.get().forEach { dep ->
+            depends(
+                dep.module.name,
+                ">=${libs.versions.silk.get()}"
+            )
+        }
     }
 }
 
