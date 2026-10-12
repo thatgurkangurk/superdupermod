@@ -11,14 +11,15 @@ package me.gurkz.superdupermod.client.datagen
 import me.gurkz.superdupermod.item.ModItems
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
+import net.minecraft.advancements.Advancement
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.recipes.RecipeCategory
-import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.RecipeProvider
+import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.Recipe
 import java.util.concurrent.CompletableFuture
-
 
 class SuperDuperRecipeProvider(
     output: FabricPackOutput,
@@ -30,10 +31,11 @@ class SuperDuperRecipeProvider(
     }
 
     override fun createRecipeProvider(
-        registryLookup: HolderLookup.Provider,
-        exporter: RecipeOutput
+        p0: HolderLookup.Provider,
+        p1: BootstrapContext<Recipe<*>>,
+        p2: BootstrapContext<Advancement>
     ): RecipeProvider {
-        return object : RecipeProvider(registryLookup, exporter) {
+        return object : RecipeProvider(p1, p2) {
             override fun buildRecipes() {
                 shaped(RecipeCategory.TOOLS, ModItems.SILENCER_STICK, 1)
                     .pattern("W  ")
